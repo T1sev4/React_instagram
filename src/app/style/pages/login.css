@@ -1,0 +1,48 @@
+.login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.login form{
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 100%;
+}
+.login img{
+  width: 50%;
+  margin: 0 0 30px;
+}
+.login form input{
+  margin: 2px auto;
+}
+.login input{
+  width: 80%;
+  margin: 0 auto;
+}
+.login button{
+  width: 80%;
+  margin: 10px auto;
+}
+.login span{
+  color: #0095f6;
+  cursor: pointer;
+}
+.register-header{
+  width: 80%;
+  margin: 0 auto;
+  font-size: 17px;
+  font-weight: 600;
+  color: #737373;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.register-p{
+  font-weight: 400;
+  font-size: 12px;
+  text-align: center;
+  color: #737373;
+  margin: 10px auto;
+  width: 80%;
+}
