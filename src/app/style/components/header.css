@@ -1,0 +1,28 @@
+.header_logo{
+  max-width: 110px;
+  width: 100%;
+}
+.header_logo img{
+  width: 100%;
+}
+.header_search{
+  max-width: 215px;
+  width: 100%;
+  border: 1px solid #DBDBDB;
+  border-radius: 2px;
+}
+.header_search_icon{
+  width: 10px;
+}
+.header_search input{
+  background: none;
+  outline: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 300;
+  color: #8E8E8E;
+  width: 30%;
+}
+.header_icons{
+  gap: 15px;
+}

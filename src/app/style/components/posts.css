@@ -1,0 +1,9 @@
+.posts_nav{
+  border-top: 1px solid #DBDBDB;
+  width: 100%;
+}
+.post{
+  width: calc(100% / 3 - 10px);
+  height: 300px;
+  background-color: red;
+}

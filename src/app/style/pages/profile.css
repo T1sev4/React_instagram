@@ -1,0 +1,25 @@
+.profile_person{
+  margin-bottom: 150px;
+}
+.profile_avatar{
+  max-width: 150px;
+  width: 100%;
+  height: 150px;
+  background-color: red;
+  margin-right: 100px;
+  border-radius: 50%;
+}
+.profile_text{
+  width: 50%;
+}
+.profile_name_big h2{
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 400; 
+}
+.profile_name_big button{
+  max-width: 90px;
+}
+.profile_info span, .profile_name_small{
+  font-weight: 600;
+}

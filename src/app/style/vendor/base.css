@@ -2,3 +2,97 @@ h1{
   text-align: center;
   font-size: 100px;
 }
+.container{
+  max-width: 935px;
+  width: 100%;
+  padding: 0 20px;
+  display: block;
+  margin: 0 auto;
+}
+.flex{
+  display: flex;
+}
+.flex-cl{
+  flex-direction: column;
+}
+.flex-jc-c{
+  justify-content: center;
+}
+.flex-jc-sb{
+  justify-content: space-between;
+}
+.flex-ai-c{
+  align-items: center;
+}
+.flex-w{
+  flex-wrap: wrap;
+}
+.gap1{
+  gap: 5px;
+}
+.gap2{
+  gap: 10px;
+}
+.gap3{
+  gap: 15px;
+}
+.gap4{
+  gap: 20px;
+}
+.gap8{
+  gap: 40px;
+}
+.p0{
+  padding: 0;
+}
+.p1{
+  padding: 5px;
+}
+.p2{
+  padding: 10px;
+}
+.p3{
+  padding: 15px;
+}
+.p4{
+  padding: 20px;
+}
+.p8{
+  padding: 40px;
+}
+.ptb2{
+  padding: 10px 0;
+}
+.ptb4{
+  padding: 20px 0;
+}
+.ptb8{
+  padding: 40px 0;
+}
+.m0{
+  padding: 0;
+}
+.m1{
+  margin: 5px;
+}
+.m2{
+  margin: 10px;
+}
+.m3{
+  margin: 15px;
+}
+.m4{
+  margin: 20px;
+}
+.m8{
+  margin: 40px;
+}
+.mtb2{
+  margin: 10px 0;
+}
+.mtb4{
+  margin: 20px 0;
+}
+.mtb8{
+  margin: 40px 0;
+}
