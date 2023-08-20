@@ -29,3 +29,6 @@
 .profile_info span, .profile_name_small{
   font-weight: 600;
 }
+.profile_menu_icon{
+  width: 20px;
+}

@@ -18,6 +18,7 @@ export default function Header(){
           <img src='/images/header/NewPosts.svg' alt='' />
           <img src='/images/header/FindPeople.svg' alt='' />
           <img src='/images/header/heart.svg' alt='' />
+          <img src='https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg' alt='' />
         </div>
       </div>
     </header>

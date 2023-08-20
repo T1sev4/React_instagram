@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faEllipsis} from '@fortawesome/free-solid-svg-icons';
+
 import MyPosts from "../myposts"
 export default function Profile(){
 
@@ -39,6 +42,7 @@ export default function Profile(){
             <div className="profile_name_big flex flex-ai-c gap8">
               <h2>terrylucas</h2>
               <button className="button">Follow</button>
+              <FontAwesomeIcon className='profile_menu_icon' icon={faEllipsis} />
             </div>
             <div className="profile_info flex gap4 mtb4">
               <a> <span>0</span> posts</a>
