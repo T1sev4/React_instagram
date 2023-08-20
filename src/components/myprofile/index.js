@@ -4,27 +4,27 @@ export default function Profile(){
   const userPosts = [
     {
       description: 'test 1',
-      img: ''
+      img: 'https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg'
     },
     {
       description: 'test 1',
-      img: ''
+      img: 'https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg'
     },
     {
       description: 'test 1',
-      img: ''
+      img: 'https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg'
     },
     {
       description: 'test 1',
-      img: ''
+      img: 'https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg'
     },
     {
       description: 'test 1',
-      img: ''
+      img: 'https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg'
     },
     {
       description: 'test 1',
-      img: ''
+      img: 'https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg'
     },
   ]
 
@@ -33,12 +33,12 @@ export default function Profile(){
       <div className="profile_inner container">
         <div className="profile_person flex flex-ai-c">
           <div className="profile_avatar">
-            <img src="" alt="" />
+            <img src="https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg" alt="" />
           </div>
           <div className="profile_text">
             <div className="profile_name_big flex flex-ai-c gap8">
               <h2>terrylucas</h2>
-              <button className="button">follow</button>
+              <button className="button">Follow</button>
             </div>
             <div className="profile_info flex gap4 mtb4">
               <a> <span>0</span> posts</a>
