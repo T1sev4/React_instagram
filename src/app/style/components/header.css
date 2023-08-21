@@ -26,6 +26,9 @@
 .header_icons{
   gap: 15px;
 }
+.header_icons img{
+  cursor: pointer;
+}
 .header_icons img:last-child{
   width: 30px;
   height: 30px;

@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 
-export default function Header(){
+export default function Header({openModal}){
   return(
     <header className="header ptb4">
       <div className="container flex flex-jc-sb flex-ai-c">
@@ -15,7 +15,7 @@ export default function Header(){
         <div className="header_icons flex">
           <img src='/images/header/home.svg' alt='' />
           <img src='/images/header/message.svg' alt='' />
-          <img src='/images/header/NewPosts.svg' alt='' />
+          <img onClick={openModal} src='/images/header/NewPosts.svg' alt='' />
           <img src='/images/header/FindPeople.svg' alt='' />
           <img src='/images/header/heart.svg' alt='' />
           <img src='https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg' alt='' />
