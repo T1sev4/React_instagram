@@ -25,7 +25,7 @@
   width: 80%;
   margin: 10px auto;
 }
-.login span{
+.login_link{
   color: #0095f6;
   cursor: pointer;
 }
