@@ -46,7 +46,7 @@
   width: 70%;
   border-radius: 20px;
   background-color: #fff;
-  height: 80vh;
+  height: 85vh;
   overflow: hidden;
 }
 .back{
@@ -121,4 +121,33 @@
   100%{
     transform: scale(1);
   }
+}
+.create_content{
+  width: 40%;
+  padding: 20px;
+}
+.create_content_header{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.create_content img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.create_post_textarea textarea{
+  width: 100%;
+  min-height: 340px;
+  border: none;
+  outline: none;
+  resize: none;
+}
+.create_post_textarea > div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #ddd;
 }
