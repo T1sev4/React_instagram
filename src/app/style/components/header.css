@@ -10,6 +10,8 @@
   width: 100%;
   border: 1px solid #DBDBDB;
   border-radius: 2px;
+  display: flex;
+  justify-content: center;
 }
 .header_search_icon{
   width: 10px;
@@ -22,6 +24,34 @@
   font-weight: 300;
   color: #8E8E8E;
   width: 30%;
+
+  /* margin: 0 auto; */
+}
+#active_input{
+  width: 100%;
+  animation: search .3s linear;
+  /* margin: 0; */
+}
+#inactive_input{
+  animation: searchReverse .3s linear;
+}
+@keyframes search {
+  from{
+    width: 10%;
+  }
+  to{
+    width: 100%;
+  }
+  
+}
+@keyframes searchReverse {
+  from{
+    width: 100%;
+  }
+  to{
+    width: 30%;
+  }
+  
 }
 .header_icons{
   gap: 15px;

@@ -3,6 +3,7 @@
 'use client'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {faArrowLeft} from "@fortawesome/free-solid-svg-icons"
+import {faXmark} from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import Filter from "./filter"
 export default function ModalWindow({closeModal}){
@@ -95,7 +96,7 @@ export default function ModalWindow({closeModal}){
   return(
     <>
       <div className="modal_window">
-        <button onClick={closeModal} className="modal_close_btn">X</button>
+        <button onClick={closeModal} className="modal_close_btn"><FontAwesomeIcon icon={faXmark} /></button>
         {step === 0 &&<div className="content">
           <h2>Создай новый пост</h2>
           <div className="content_drag_and_drop">

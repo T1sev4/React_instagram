@@ -1,16 +1,32 @@
+'use client'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
-
+import { useState } from 'react';
 export default function Header({openModal}){
+
+  const [inputClicked, setInputClicked] = useState();
+
   return(
     <header className="header ptb4">
       <div className="container flex flex-jc-sb flex-ai-c">
         <div className="header_logo">
           <img src="/images/logo-insta.png" alt="logo" />
         </div>
-        <div className="header_search flex flex-jc-c p1">
+        <div className={`header_search flex p1`}>
           <FontAwesomeIcon className='header_search_icon' icon={faMagnifyingGlass} />
-          <input type='text' placeholder='Search'/>
+          <input
+            onClick={() => setInputClicked(true)}
+            onBlur={() => {
+              setInputClicked(false)
+            }}
+            type='text' 
+            placeholder='Поиск'
+            id={
+              inputClicked ? "active_input" : 
+              inputClicked === false ? "inactive_input" : ""
+            }
+          />
         </div>
         <div className="header_icons flex">
           <img src='/images/header/home.svg' alt='' />
