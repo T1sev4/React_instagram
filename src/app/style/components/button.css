@@ -11,8 +11,16 @@
   background-color: #0095f6;
   width: 100%;
   border-radius: 8px;
+  position: relative;
+  cursor: pointer;
 }
 
 .btn_lightBlue{
   opacity: 70%;
+}
+
+.button input{
+  position: absolute;
+  inset: 0;
+  opacity: 0;
 }

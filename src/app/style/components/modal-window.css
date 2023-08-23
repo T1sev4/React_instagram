@@ -52,6 +52,9 @@
 .back{
   cursor: pointer;
 }
+.edit_content_header{
+  border-bottom: 1px solid #ddd;
+}
 .edit_content_header a{
   cursor: pointer;
   color: #0095f6;
@@ -61,9 +64,61 @@
   transition: .3s;
 }
 .edit_post_image{
-  width: 50%;
+  width: 60%;
 }
 .edit_post_image img{
   width: 100%;
   object-fit: cover;
+}
+.edit_content_filters{
+  width: 40%;
+}
+.filters_header{
+  border-bottom: 1px solid #ddd;
+  padding: 14px 20%;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.filters{
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  overflow: scroll;
+}
+.filter{
+  width: 28%;
+} 
+.filter img{
+  width: 100%;
+  border-radius: 10px;
+  border: 3px solid transparent;
+}
+.filter p{
+  text-align: center;
+  color: #a8a8a8;
+  font-size: 12px;
+}
+.selected_filter{
+  animation: selectedFilter .3s linear;
+ 
+}
+.selected_filter img{
+  border: 3px solid #0095f6;
+}
+.selected_filter p{
+  color: #0095f6;
+}
+
+@keyframes selectedFilter{
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(0.9);
+  }
+  100%{
+    transform: scale(1);
+  }
 }
