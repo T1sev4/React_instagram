@@ -19,7 +19,7 @@ export default function UserRegister(){
         </form>
       </div>
       <div className="card">
-       <p>У вас уже есть аккаунт? <Link className="login_link" href="/login">Войти</Link></p>
+       <p>У вас уже есть аккаунт? <Link className="login_link" href="/">Войти</Link></p>
       </div>
     </div>
 

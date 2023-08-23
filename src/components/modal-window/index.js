@@ -1,14 +1,70 @@
 // import newPost from '../../../public/images/newPost.svg'
 // import Image from 'next/image'
 'use client'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {faArrowLeft} from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
+import Filter from "./filter"
 export default function ModalWindow({closeModal}){
+
+  const filters = [
+    {
+      url: '/images/filters/filter1.jpeg',
+      name: 'Aden',
+    },
+    {
+      url: '/images/filters/filter2.jpeg',
+      name: 'Clarendon',
+    },
+    {
+      url: '/images/filters/filter3.jpeg',
+      name: 'Crema',
+    },
+    {
+      url: '/images/filters/filter4.jpeg',
+      name: 'Gingham',
+    },
+    {
+      url: '/images/filters/filter5.jpeg',
+      name: 'Juno',
+    },
+    {
+      url: '/images/filters/filter6.jpeg',
+      name: 'Lark',
+    },
+    {
+      url: '/images/filters/filter7.jpeg',
+      name: 'Ludwig',
+    },
+    {
+      url: '/images/filters/filter8.jpeg',
+      name: 'Moon',
+    },
+    {
+      url: '/images/filters/filter9.jpeg',
+      name: 'Оригинал',
+    },
+    {
+      url: '/images/filters/filter10.jpeg',
+      name: 'Perpetua',
+    },
+    {
+      url: '/images/filters/filter11.jpeg',
+      name: 'Reyes',
+    },
+    {
+      url: '/images/filters/filter12.jpeg',
+      name: 'Slumber',
+    },
+  ]
+
+  const [step, setStep] = useState(1);
 
   return(
     <>
       <div className="modal_window">
         <button onClick={closeModal} className="modal_close_btn">X</button>
-        <div className="content">
+        {step === 0 &&<div className="content">
           <h2>Создай новый пост</h2>
           <div className="content_drag_and_drop">
             {/* <Image src={newPost} alt="new post" /> */}
@@ -16,8 +72,30 @@ export default function ModalWindow({closeModal}){
             <p className="mtb4">Перетащите сюда фото и видео</p>
             <button className="button ">Выбрать на компьютере</button>
           </div>
-        </div>
+        </div>}
+        
+        {step === 1 && <div className="edit_content">
+          <div className="edit_content_header flex flex-jc-sb flex-ai-c p4">
+            <FontAwesomeIcon className="back" icon={faArrowLeft} />
+            <h2>Редактирование</h2>
+            <a>Далее</a>
+          </div>
+          <div className="edit_post_space flex">
+            <div className="edit_post_image">
+              <img src="https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg" alt="post image" />  
+            </div> 
+            <div>
+              <p>Filters</p>
+              <div className="filters">
+                {filters.map((item, index) => ( <Filter url={item.url} name={item.name} key={index} />))}
+              </div>
+            </div>
+          </div>
+        </div>}
+
       </div>
+
+
     </>
    
   )

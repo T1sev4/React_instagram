@@ -42,3 +42,28 @@
 .content_drag_and_drop button{
   width: 40%;
 }
+.edit_content{
+  width: 70%;
+  border-radius: 20px;
+  background-color: #fff;
+  height: 80vh;
+  overflow: hidden;
+}
+.back{
+  cursor: pointer;
+}
+.edit_content_header a{
+  cursor: pointer;
+  color: #0095f6;
+}
+.edit_content_header a:hover{
+  color: #333;
+  transition: .3s;
+}
+.edit_post_image{
+  width: 50%;
+}
+.edit_post_image img{
+  width: 100%;
+  object-fit: cover;
+}
