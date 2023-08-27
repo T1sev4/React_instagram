@@ -6,27 +6,27 @@ export default function Profile({openModal}){
 
   const userPosts = [
     {
-      description: 'test 1',
+      comment: 'test 1',
       img: '/images/posts/post1.jpg'
     },
     {
-      description: 'test 1',
+      comment: '',
       img: '/images/posts/post2.jpg'
     },
     {
-      description: 'test 1',
+      comment: 'test 3',
       img: '/images/posts/post3.png'
     },
     {
-      description: 'test 1',
+      comment: '',
       img: '/images/posts/post4.jpg'
     },
     {
-      description: 'test 1',
+      comment: 'test 5',
       img: '/images/posts/post5.jpg'
     },
     {
-      description: 'test 1',
+      comment: 'test 6',
       img: '/images/posts/post6.jpg'
     },
   ]

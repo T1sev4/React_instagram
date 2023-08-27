@@ -49,6 +49,7 @@ export default function DetailPostMD({closeModal, currentPost}){
             <FontAwesomeIcon icon={faEllipsis} />
           </div>
           <div className="detail_modal_comments">
+            {currentPost.comment.length > 0 && <Comment item={currentPost} remove={remove} />}
             {comments.map((item, index) => (<Comment item={item} remove={remove} key={index} />))}
             
           </div>
