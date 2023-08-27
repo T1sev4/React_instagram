@@ -1,6 +1,6 @@
-export default function MyPost({post}){
+export default function MyPost({post, openModal}){
   return(
-    <div className="post">
+    <div onClick={openModal} className="post">
       <img src={post.img} alt="" />
     </div>
   )

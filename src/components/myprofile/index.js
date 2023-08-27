@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faEllipsis} from '@fortawesome/free-solid-svg-icons';
 
 import MyPosts from "../myposts"
-export default function Profile(){
+export default function Profile({openModal}){
 
   const userPosts = [
     {
@@ -54,7 +54,7 @@ export default function Profile(){
             </div>
           </div>
         </div>
-        <MyPosts userPosts = {userPosts} />
+        <MyPosts openModal={openModal} userPosts = {userPosts} />
       </div>
     </div>
   )
