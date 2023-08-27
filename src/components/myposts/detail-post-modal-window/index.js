@@ -26,8 +26,12 @@ export default function DetailPostMD({closeModal}){
     setComment('')
   }
 
-  console.log(comment)
-  console.log(comments)
+  const remove = (Comment) => {
+    let com = [...comments]
+    let index = comments.indexOf(Comment)
+    com.splice(index, 1)
+    setComments(com)
+  }
 
   return(
     <div className="modal_window">
@@ -45,7 +49,7 @@ export default function DetailPostMD({closeModal}){
             <FontAwesomeIcon icon={faEllipsis} />
           </div>
           <div className="detail_modal_comments">
-            {comments.map((item, index) => (<Comment item={item} key={index} />))}
+            {comments.map((item, index) => (<Comment item={item} remove={remove} key={index} />))}
             
           </div>
           <div className="detail_post_info flex flex-ai-c flex-jc-sb">
@@ -58,6 +62,8 @@ export default function DetailPostMD({closeModal}){
             <a onClick={save}>Опубликовать</a>
           </div>
         </div>
+
+
       </div>
     </div>
   )
