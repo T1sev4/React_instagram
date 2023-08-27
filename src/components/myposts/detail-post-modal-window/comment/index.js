@@ -12,7 +12,7 @@ export default function Comment({item, remove}){
     <div className="comment">
       <div className="comment_box">
         <div className="flex flex-ai-c">
-          <img src="https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg"  alt=""/>
+          <img src="/images/posts/post2.jpg"  alt=""/>
           <p className="comment_text"><span>terrylucas</span> {item.comment}</p>
         </div>
         <div className="comment_info">

@@ -7,7 +7,7 @@ import Comment from "./comment";
 import { useState } from "react";
 
 
-export default function DetailPostMD({closeModal}){
+export default function DetailPostMD({closeModal, currentPost}){
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
 
@@ -38,12 +38,12 @@ export default function DetailPostMD({closeModal}){
       <button onClick={closeModal} className="modal_close_btn"><FontAwesomeIcon icon={faXmark} /></button>
       <div className="detail_modal_window">
         <div className="detail_modal_left">
-          <img src="https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg" alt="" />
+          <img src={currentPost.img} alt="" />
         </div>
         <div className="detail_modal_right">
           <div className="detail_modal_header flex flex-ai-c flex-jc-sb">
             <div className="flex flex-ai-c gap2">
-              <img src="https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg"  alt=""/>
+              <img src="/images/posts/post2.jpg"  alt=""/>
               <h4>terrylucas</h4>
             </div>
             <FontAwesomeIcon icon={faEllipsis} />

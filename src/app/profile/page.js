@@ -10,13 +10,19 @@ import { useState } from 'react';
 export default function Login() {
   const [isModalOpen, setModalOpen] = useState(false); // Состояние для модального окна
   const [isModalDetailOpen, setModalDetailOpen] = useState(false); // Состояние для модального окна
+  const [currentPost, setCurrentPost] = useState({})
 
+  const openModal = (post) => {
+    setCurrentPost(post)
+    setModalDetailOpen(true)
+  }
+  
   return (
     <main>
       <Header openModal={() => setModalOpen(true)} />
-      <Profile openModal={() => setModalDetailOpen(true)} />
+      <Profile openModal={openModal} />
       {isModalOpen && <ModalWindow closeModal={() => setModalOpen(false)} />}
-      {isModalDetailOpen && <DetailPostMD closeModal={() => setModalDetailOpen(false)} />}
+      {isModalDetailOpen && <DetailPostMD currentPost={currentPost} closeModal={() => setModalDetailOpen(false)} />}
     </main>
   )
 }

@@ -7,27 +7,27 @@ export default function Profile({openModal}){
   const userPosts = [
     {
       description: 'test 1',
-      img: 'https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg'
+      img: '/images/posts/post1.jpg'
     },
     {
       description: 'test 1',
-      img: 'https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg'
+      img: '/images/posts/post2.jpg'
     },
     {
       description: 'test 1',
-      img: 'https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg'
+      img: '/images/posts/post3.png'
     },
     {
       description: 'test 1',
-      img: 'https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg'
+      img: '/images/posts/post4.jpg'
     },
     {
       description: 'test 1',
-      img: 'https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg'
+      img: '/images/posts/post5.jpg'
     },
     {
       description: 'test 1',
-      img: 'https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg'
+      img: '/images/posts/post6.jpg'
     },
   ]
 
@@ -36,7 +36,7 @@ export default function Profile({openModal}){
       <div className="profile_inner container">
         <div className="profile_person flex flex-ai-c">
           <div className="profile_avatar">
-            <img src="https://w.forfun.com/fetch/39/399f74771a37da97630f86e85696f882.jpeg" alt="" />
+            <img src="/images/posts/post2.jpg" alt="" />
           </div>
           <div className="profile_text">
             <div className="profile_name_big flex flex-ai-c gap8">
