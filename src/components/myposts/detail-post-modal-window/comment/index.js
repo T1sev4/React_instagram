@@ -2,6 +2,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart } from "@fortawesome/free-solid-svg-icons"
 import {faEllipsis} from '@fortawesome/free-solid-svg-icons';
+
 import { useState } from "react";
 
 export default function Comment({item, remove}){

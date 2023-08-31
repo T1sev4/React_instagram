@@ -8,7 +8,7 @@ export default function Header({openModal}){
   const [inputClicked, setInputClicked] = useState();
 
   return(
-    <header className="header ptb4">
+    <header className="header">
       <div className="container flex flex-jc-sb flex-ai-c">
         <div className="header_logo">
           <img src="/images/logo-insta.png" alt="logo" />
