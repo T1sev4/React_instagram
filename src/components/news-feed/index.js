@@ -1,5 +1,6 @@
 import Stories from "./stories"
 import News from "./news"
+import Suggestions from "./suggestions"
 export default function NewsFeed(){
   return (
     <div className="NewsFeed">
@@ -10,7 +11,7 @@ export default function NewsFeed(){
             <News />
           </div>
           <div className="NewsFeed_right">
-
+            <Suggestions />
           </div>
         </div>
       </div>

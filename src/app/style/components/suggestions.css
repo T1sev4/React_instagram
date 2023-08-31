@@ -1,0 +1,25 @@
+.suggestions_header{
+  margin-bottom: 10px;
+}
+.suggestions_header h2{
+  color: #a8a8a8;
+  font-size: 14px;
+}
+.suggestions_header p{
+  font-size: 14px;
+}
+.suggestion{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+.suggestion img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.suggestion p{
+  color: #0095f6;
+}

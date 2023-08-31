@@ -1,0 +1,10 @@
+.NewsFeed_inner{
+  display: flex;
+  gap: 50px;
+}
+.NewsFeed_left{
+  width: 70%;
+}
+.NewsFeed_right{
+  width: 30%;
+}

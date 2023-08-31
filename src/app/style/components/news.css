@@ -1,0 +1,24 @@
+.newPost_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+.newPost_header img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.newPost_img img{
+  width: 100%;
+}
+.newPost_icon{
+  padding: 10px 20px;
+  font-size: 20px;
+}
+.newPost_info{
+  padding: 0 10px;
+}
+.newPost_info_likes{
+  margin-bottom: 5px;
+}
