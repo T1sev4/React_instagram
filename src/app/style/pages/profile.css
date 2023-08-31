@@ -26,6 +26,9 @@
 .profile_name_big button{
   max-width: 90px;
 }
+.profile_info a{
+  cursor: pointer;
+}
 .profile_info span, .profile_name_small{
   font-weight: 600;
 }
