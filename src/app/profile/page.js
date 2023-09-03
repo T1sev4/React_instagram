@@ -19,14 +19,28 @@ export default function Login() {
     setModalDetailOpen(true)
   }
 
+  const followers = [
+    {
+      full_name: 'Tamerlan',
+      username: 'Tamik'
+    },
+    {
+      full_name: 'Tamerlan',
+      username: 'Tamik'
+    },
+    {
+      full_name: 'Tamerlan',
+      username: 'Tamik'
+    },
+  ]
   
   return (
     <main>
       <Header openModal={() => setModalOpen(true)} />
-      <Profile openFollowers={() => setModalFollowers(true)} openModal={openModal} />
+      <Profile followers={followers} openFollowers={() => setModalFollowers(true)} openModal={openModal} />
       {isModalOpen && <ModalWindow closeModal={() => setModalOpen(false)} />}
       {isModalDetailOpen && <DetailPostMD currentPost={currentPost} closeModal={() => setModalDetailOpen(false)} />}
-      {isModalFollowers && <Followers close={() => setModalFollowers(false)} />}
+      {isModalFollowers && <Followers followers={followers} close={() => setModalFollowers(false)} />}
     </main>
   )
 }

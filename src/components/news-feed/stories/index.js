@@ -5,6 +5,7 @@ export default function Stories({onClick}){
 
   const [showModal, setShowModal] = useState(false);
   const [selectedStory, setSelectedStory] = useState(null);
+  const [timerId, setTimerId] = useState(null);
 
   const storiesArray = [
     {
@@ -26,14 +27,26 @@ export default function Stories({onClick}){
     setSelectedStory(story);
     setShowModal(true);
 
-    setTimeout(() => {
+    // Отменяем предыдущий таймер, если он был установлен
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+
+    // Устанавливаем новый таймер на закрытие модального окна через 5 секунд
+    const newTimerId = setTimeout(() => {
       closeModal();
     }, 5000);
+
+    setTimerId(newTimerId); // Сохраняем идентификатор нового таймера
   };
 
   const closeModal = () => {
     setSelectedStory(null);
     setShowModal(false);
+
+    if (timerId) {
+      clearTimeout(timerId);
+    }
   };
 
   return(
