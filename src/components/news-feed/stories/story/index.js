@@ -1,7 +1,7 @@
-export default function Story(){
+export default function Story({story, onClick}){
   return(
-    <div className="story">
-      <img src="/images/posts/post1.jpg" alt="" />
+    <div className="story" onClick={onClick}>
+      <img src={story.imageUrl} alt={story.username} />
     </div>  
   )
 }

@@ -3,6 +3,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import Link from 'next/link';
 export default function Header({openModal}){
 
   const [inputClicked, setInputClicked] = useState();
@@ -11,7 +12,9 @@ export default function Header({openModal}){
     <header className="header">
       <div className="container flex flex-jc-sb flex-ai-c">
         <div className="header_logo">
-          <img src="/images/logo-insta.png" alt="logo" />
+          <Link href="/home">
+            <img src="/images/logo-insta.png" alt="logo" />
+          </Link>
         </div>
         <div className={`header_search flex p1`}>
           <FontAwesomeIcon className='header_search_icon' icon={faMagnifyingGlass} />
@@ -34,7 +37,9 @@ export default function Header({openModal}){
           <img onClick={openModal} src='/images/header/NewPosts.svg' alt='' />
           <img src='/images/header/FindPeople.svg' alt='' />
           <img src='/images/header/heart.svg' alt='' />
-          <img src='/images/posts/post2.jpg' alt='' />
+          <Link href="/profile">
+            <img src='/images/posts/post2.jpg' alt='' />
+          </Link>
         </div>
       </div>
     </header>

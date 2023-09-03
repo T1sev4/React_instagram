@@ -1,0 +1,109 @@
+/* StoryModal.css */
+.story-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #1a1a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.story-content {
+  background: white;
+  height: 90vh;
+  max-width: 450px;
+  width: 100%;
+  /* padding: 20px; */
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+}
+.storyLineBg{
+  width: 90%;
+  margin: 0 auto;
+  background-color: #696969;
+  border-radius: 50px;
+  height: 3px;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+}
+.storyLineFill{
+  width: 100%;
+  background-color: #fff;
+  border-radius: 50px;
+  height: 3px;
+  animation: lineFill 5s linear;
+}
+.storyHeader{
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  color: #fff;
+  font-size: 18px;
+  gap: 10px;
+}
+.storyHeader img{
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+.storyImg{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.storyAction{
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  padding: 0 10px;
+}
+.storyAction input{
+  background: none;
+  border: none;
+  outline: none;
+  width: 80%;
+  border: 1px solid #fff;
+  padding: 10px;
+  border-radius: 20px;
+  caret-color: #ffffff;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+}
+.storyActionIcon{
+  color: #fff;
+  font-size: 20px;
+}
+.storyAction input::placeholder{
+  color: #fff;
+}
+.story-content button {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  font-size: 30px;
+  color: white;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+@keyframes lineFill {
+  from{
+    width: 0%;
+  }
+  to{
+    width: 100%;
+  }
+  
+}

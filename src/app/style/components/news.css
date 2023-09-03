@@ -1,6 +1,7 @@
 .newPost_header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px 0;
 }
 .newPost_header img{
