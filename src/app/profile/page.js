@@ -10,7 +10,8 @@ import { useState } from 'react';
 export default function Login() {
   const [isModalOpen, setModalOpen] = useState(false); // Состояние для модального окна
   const [isModalDetailOpen, setModalDetailOpen] = useState(false); // Состояние для модального окна
-  const [isModalFollowers, setModalFollowers] = useState(false); // Состояние для модального окна
+  const [isModalFollowers, setModalFollowers] = useState(false); 
+  const [isModalFollowing, setModalFollowing] = useState(false); 
   
   const [currentPost, setCurrentPost] = useState({})
 
@@ -37,10 +38,11 @@ export default function Login() {
   return (
     <main>
       <Header openModal={() => setModalOpen(true)} />
-      <Profile followers={followers} openFollowers={() => setModalFollowers(true)} openModal={openModal} />
+      <Profile followers={followers} openFollowers={() => setModalFollowers(true)} openFollowing={() => setModalFollowing(true)} openModal={openModal} />
       {isModalOpen && <ModalWindow closeModal={() => setModalOpen(false)} />}
       {isModalDetailOpen && <DetailPostMD currentPost={currentPost} closeModal={() => setModalDetailOpen(false)} />}
-      {isModalFollowers && <Followers followers={followers} close={() => setModalFollowers(false)} />}
+      {isModalFollowers && <Followers title="Followers" followers={followers} close={() => setModalFollowers(false)} />}
+      {isModalFollowing && <Followers title="Following" followers={followers} close={() => setModalFollowing(false)} />}
     </main>
   )
 }

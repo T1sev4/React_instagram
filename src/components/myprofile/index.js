@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faEllipsis} from '@fortawesome/free-solid-svg-icons';
 
 import MyPosts from "../myposts"
-export default function Profile({openFollowers, openModal, followers}){
+export default function Profile({openFollowers, openModal, followers, openFollowing}){
 
   const userPosts = [
     {
@@ -47,7 +47,7 @@ export default function Profile({openFollowers, openModal, followers}){
             <div className="profile_info flex gap4 mtb4">
               <a> <span>{userPosts.length}</span> posts</a>
               <a onClick={openFollowers}> <span>{followers.length}</span> followers</a>
-              <a> <span>0</span> following</a>
+              <a onClick={openFollowing}> <span>0</span> following</a>
             </div>
             <div className="profile_name_small">
               Terry Lucas

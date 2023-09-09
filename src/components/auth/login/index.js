@@ -1,5 +1,14 @@
+'use client'
 import Link from "next/link"
+import axios from "axios"
+import { useEffect } from "react"
 export default function UserLogin(){
+
+  // useEffect(() => {
+  //   axios.post('http://localhost:3001/api/auth/signin', {email: 'ostintimberlake@gmail.com', password: 'asd'}).then(res => {
+  //     console.log(res.data)
+  //   })
+  // }, [])
 
   return(
    <section className="login">
