@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {faXmark} from "@fortawesome/free-solid-svg-icons"
 import {faEllipsis} from '@fortawesome/free-solid-svg-icons';
-import {faHeart} from '@fortawesome/free-solid-svg-icons';
-import {faBookmark} from '@fortawesome/free-solid-svg-icons';
+import {faHeart} from '@fortawesome/free-regular-svg-icons';
+import {faBookmark} from '@fortawesome/free-regular-svg-icons';
 import Comment from "./comment";
 import { useState } from "react";
 
@@ -54,7 +54,7 @@ export default function DetailPostMD({closeModal, currentPost}){
             
           </div>
           <div className="detail_post_info flex flex-ai-c flex-jc-sb">
-            <FontAwesomeIcon icon={faHeart} />
+            <FontAwesomeIcon icon={faHeart}/>
             <FontAwesomeIcon icon={faBookmark} />
           </div>
           <div className="comment_form">

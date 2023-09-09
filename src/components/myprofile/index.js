@@ -47,7 +47,7 @@ export default function Profile({openFollowers, openModal, followers, openFollow
             <div className="profile_info flex gap4 mtb4">
               <a> <span>{userPosts.length}</span> posts</a>
               <a onClick={openFollowers}> <span>{followers.length}</span> followers</a>
-              <a onClick={openFollowing}> <span>0</span> following</a>
+              <a onClick={openFollowing}> <span>{followers.length}</span> following</a>
             </div>
             <div className="profile_name_small">
               Terry Lucas

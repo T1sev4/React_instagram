@@ -1,8 +1,9 @@
 'use client'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faXmark } from "@fortawesome/free-solid-svg-icons"
-import { faHeart } from "@fortawesome/free-solid-svg-icons"
-import { faMessage } from "@fortawesome/free-solid-svg-icons"
+import { faHeart } from "@fortawesome/free-regular-svg-icons"
+import { faPaperPlane } from "@fortawesome/free-regular-svg-icons"
+
 export default function ModalWindowStory({ story, onClose }){
   console.log(story)
   return(
@@ -19,7 +20,7 @@ export default function ModalWindowStory({ story, onClose }){
         <div className="storyAction flex flex-ai-c gap2">
           <input type="text" placeholder={`ответьте ${story.username}`} />
           <FontAwesomeIcon className="storyActionIcon" icon={faHeart} />
-          <FontAwesomeIcon  className="storyActionIcon" icon={faMessage} />
+          <FontAwesomeIcon  className="storyActionIcon" icon={faPaperPlane} />
         </div>
       </div>
         <button onClick={onClose} className="modal_close_btn"><FontAwesomeIcon icon={faXmark} /></button>
