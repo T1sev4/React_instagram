@@ -1,17 +1,29 @@
 'use client'
 import Link from "next/link"
 import axios from "axios"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { authorize } from "@/app/store/slices/authSlice"
+import { authorize, signIn } from "@/app/store/slices/authSlice"
+import { useRouter } from 'next/navigation'
+
 export default function UserLogin(){
   const dispatch = useDispatch()
+  const router = useRouter()
   const isAuth = useSelector((state) => state.auth.isAuth)
-  // useEffect(() => {
-  //   axios.post('http://localhost:3001/api/auth/signin', {email: 'ostintimberlake@gmail.com', password: 'asd'}).then(res => {
-  //     console.log(res.data)
-  //   })
-  // }, [])
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const logIn = () => {
+    const user = {
+      email,
+      password
+    }
+    dispatch(signIn(user))
+  }
+
+  useEffect(() => {
+    if(isAuth) router.push('/profile')
+  }, [isAuth])
 
   return(
    <section className="login">
@@ -20,9 +32,9 @@ export default function UserLogin(){
       <div className="card">
         <img src="/images/logo-insta.png" alt="" />
         <form>
-          <input className="input" placeholder="Телефон, имя пользователя или эл. адрес"/>
-          <input className="input" placeholder="Пароль" />
-          <button className="button btn_lightBlue" type="button"  onClick={() => dispatch(authorize())}>Войти</button>
+          <input onChange={(e) => setEmail(e.target.value)} value={email} className="input" placeholder="Телефон, имя пользователя или эл. адрес"/>
+          <input onChange={(e) => setPassword(e.target.value)} value={password} className="input" placeholder="Пароль" />
+          <button className="button btn_lightBlue" type="button" onClick={logIn}>Войти</button>
         </form>
         <a>Забыли пароль?</a>
       </div>
