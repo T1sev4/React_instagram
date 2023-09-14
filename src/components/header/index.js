@@ -1,5 +1,4 @@
 'use client'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
@@ -37,6 +36,7 @@ export default function Header({openModal}){
           <img onClick={openModal} src='/images/header/NewPosts.svg' alt='' />
           <img src='/images/header/FindPeople.svg' alt='' />
           <img src='/images/header/heart.svg' alt='' />
+
           <Link href="/profile">
             <img src='/images/posts/post2.jpg' alt='' />
           </Link>
