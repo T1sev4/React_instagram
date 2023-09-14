@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-
+import axios from 'axios'
+import { END_POINT } from '@/config/end-point'
 export const authSlice = createSlice({
   name: 'auth',
   initialState: {
@@ -19,5 +20,10 @@ export const authSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { authorize, logOut  } = authSlice.actions
+
+
+export const signUp = (user) => (dispatch) => {
+  axios.post(`${END_POINT}/api/auth/signup`, user)
+}
 
 export default authSlice.reducer
