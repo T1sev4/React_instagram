@@ -27,7 +27,6 @@ export default function UserLogin(){
 
   return(
    <section className="login">
-    {isAuth ? "true" : "false"}
     <div className="login-wrapper">
       <div className="card">
         <img src="/images/logo-insta.png" alt="" />
