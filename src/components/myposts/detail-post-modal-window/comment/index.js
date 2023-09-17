@@ -14,7 +14,7 @@ export default function Comment({item, remove}){
       <div className="comment_box">
         <div className="flex flex-ai-c">
           <img src="/images/posts/post2.jpg"  alt=""/>
-          <p className="comment_text"><span>terrylucas</span> {item.comment}</p>
+          <p className="comment_text"><span>terrylucas</span> {item.description}</p>
         </div>
         <div className="comment_info">
           <FontAwesomeIcon onClick={() => setModal(true)} icon={faEllipsis} />

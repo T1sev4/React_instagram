@@ -38,7 +38,7 @@ export default function DetailPostMD({closeModal, currentPost}){
       <button onClick={closeModal} className="modal_close_btn"><FontAwesomeIcon icon={faXmark} /></button>
       <div className="detail_modal_window">
         <div className="detail_modal_left">
-          <img src={currentPost.img} alt="" />
+          <img src={currentPost.image} alt="" />
         </div>
         <div className="detail_modal_right">
           <div className="detail_modal_header flex flex-ai-c flex-jc-sb">
@@ -49,7 +49,7 @@ export default function DetailPostMD({closeModal, currentPost}){
             <FontAwesomeIcon icon={faEllipsis} />
           </div>
           <div className="detail_modal_comments">
-            {currentPost.comment.length > 0 && <Comment item={currentPost} remove={remove} />}
+          {currentPost.description && <Comment item={currentPost} remove={remove} />}
             {comments.map((item, index) => (<Comment item={item} remove={remove} key={index} />))}
             
           </div>

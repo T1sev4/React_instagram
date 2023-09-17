@@ -3,44 +3,24 @@ import {faEllipsis} from '@fortawesome/free-solid-svg-icons';
 import MyPosts from "../myposts"
 import { useSelector , useDispatch } from 'react-redux'
 import { logOut } from '@/app/store/slices/authSlice';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getMyPosts } from '@/app/store/slices/postSlice';
 import Link from 'next/link';
 export default function Profile({openFollowers, openModal, followers, openFollowing}){
-
-
   const [isModal, setModal] = useState(false)
 
   const dispatch = useDispatch()
+  const userPosts = useSelector((state) => state.post.posts)
+
   const user = useSelector((state) => state.auth.currentUser)
 
-  console.log(user);
+  const didMount = () => {
+    dispatch(getMyPosts())
+  }
 
-  const userPosts = [
-    {
-      comment: 'test 1',
-      img: '/images/posts/post1.jpg'
-    },
-    {
-      comment: '',
-      img: '/images/posts/post2.jpg'
-    },
-    {
-      comment: 'test 3',
-      img: '/images/posts/post3.png'
-    },
-    {
-      comment: '',
-      img: '/images/posts/post4.jpg'
-    },
-    {
-      comment: 'test 5',
-      img: '/images/posts/post5.jpg'
-    },
-    {
-      comment: 'test 6',
-      img: '/images/posts/post6.jpg'
-    },
-  ]
+  useEffect(didMount, [])
+  console.log(userPosts, 'profile')
+  console.log('render')
 
   return(
     <div className="profile">
