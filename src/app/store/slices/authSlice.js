@@ -24,6 +24,7 @@ if(token){
       tokenExp: decodedToken.exp
     }
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    // axios.defaults.headers.common['Content-Type'] = `application/json`;
   }else{
     localStorage.removeItem("token");
   }

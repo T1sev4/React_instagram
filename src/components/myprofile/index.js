@@ -6,21 +6,29 @@ import { logOut } from '@/app/store/slices/authSlice';
 import { useState, useEffect } from 'react';
 import { getMyPosts } from '@/app/store/slices/postSlice';
 import Link from 'next/link';
-export default function Profile({openFollowers, openModal, followers, openFollowing}){
-  const [isModal, setModal] = useState(false)
+import { useRouter } from 'next/navigation'
 
+export default function Profile({openFollowers, openModal, followers, openFollowing}){
+  const router = useRouter()
   const dispatch = useDispatch()
   const userPosts = useSelector((state) => state.post.posts)
-
+  const isAuth = useSelector((state) => state.auth.isAuth)
   const user = useSelector((state) => state.auth.currentUser)
+
+
+  useEffect(() => {
+    if(!isAuth) router.push('/')
+  }, [isAuth])
+
+
+  const [isModal, setModal] = useState(false)
 
   const didMount = () => {
     dispatch(getMyPosts())
   }
 
   useEffect(didMount, [])
-  console.log(userPosts, 'profile')
-  console.log('render')
+
 
   return(
     <div className="profile">
@@ -31,7 +39,7 @@ export default function Profile({openFollowers, openModal, followers, openFollow
           </div>
           <div className="profile_text">
             <div className="profile_name_big flex flex-ai-c gap8">
-              <h2>terrylucas</h2>
+              <h2>{user && user.full_name}</h2>
               <button className="button">Follow</button>
               <FontAwesomeIcon onClick={() => setModal(true)} className='profile_menu_icon' icon={faEllipsis} />
             </div>
@@ -41,13 +49,15 @@ export default function Profile({openFollowers, openModal, followers, openFollow
               <a onClick={openFollowing}> <span>{followers.length}</span> following</a>
             </div>
             <div className="profile_name_small">
-              Terry Lucas
+              {user && user.username}
             </div>
           </div>
           {isModal && <div className="comment_modal_delete">
             <div className="comment_modal_delete_bg" onClick={() => {setModal(false)}}></div>
             <div className="comment_modal_delete_wrapper">
-              <Link className='logOutBtn' href="/" onClick={() => dispatch(logOut())}>Выход</Link>
+              <p className='logOutBtn' onClick={() => {
+                dispatch(logOut())
+              }}>Выход</p>
             </div>
           </div>}
         </div>

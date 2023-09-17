@@ -38,7 +38,7 @@ export default function DetailPostMD({closeModal, currentPost}){
       <button onClick={closeModal} className="modal_close_btn"><FontAwesomeIcon icon={faXmark} /></button>
       <div className="detail_modal_window">
         <div className="detail_modal_left">
-          <img src={`${END_POINT}/${currentPost.image}`} alt="" />
+          <img src={`${END_POINT}${currentPost.image}`} alt="" />
         </div>
         <div className="detail_modal_right">
           <div className="detail_modal_header flex flex-ai-c flex-jc-sb">

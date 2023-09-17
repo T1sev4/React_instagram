@@ -32,7 +32,7 @@ export default function UserLogin(){
         <img src="/images/logo-insta.png" alt="" />
         <form>
           <input onChange={(e) => setEmail(e.target.value)} value={email} className="input" placeholder="Телефон, имя пользователя или эл. адрес"/>
-          <input onChange={(e) => setPassword(e.target.value)} value={password} className="input" placeholder="Пароль" />
+          <input onChange={(e) => setPassword(e.target.value)} value={password} className="input" placeholder="Пароль" type="password" />
           <button className="button btn_lightBlue" type="button" onClick={logIn}>Войти</button>
         </form>
         <a>Забыли пароль?</a>

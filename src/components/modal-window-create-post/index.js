@@ -6,7 +6,13 @@ import {faArrowLeft} from "@fortawesome/free-solid-svg-icons"
 import {faXmark} from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import Filter from "./filter"
+import { useDispatch } from 'react-redux'
+import { createPost } from "@/app/store/slices/postSlice"
+
 export default function ModalWindow({closeModal}){
+
+
+  const dispatch = useDispatch();
 
   const filters = [
     {
@@ -76,12 +82,13 @@ export default function ModalWindow({closeModal}){
   const [selectedImage, setSelectedImage] = useState(null);
 
   const [selectFilter, setSelectFilter] = useState(null);
-
+  const [image, setImage] = useState()
   const [description, setDescription] = useState('');
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
+      setImage(file);
       const imageUrl = URL.createObjectURL(file);
       setSelectedImage(imageUrl);
       setStep(1)
@@ -89,8 +96,18 @@ export default function ModalWindow({closeModal}){
   };
 
   const changeFilter = (index) => {
-    console.log(index)
     setSelectFilter(index);
+  }
+  
+  const sendPost = () => {
+    const formData = new FormData();
+    formData.append('image', image);  // 'image' - это имя поля в вашем бэкенде
+    formData.append('description', description);  // если у вас есть другие поля
+
+    dispatch(createPost(formData))
+    setSelectedImage(null)
+    setSelectFilter(null)
+    closeModal()
   }
 
   return(
@@ -105,9 +122,10 @@ export default function ModalWindow({closeModal}){
             <p className="mtb4">Перетащите сюда фото и видео</p>
             <button className="button">Выбрать на компьютере   <input
               type="file"
-              accept=".jpg, .jpeg, .png, .gif"
+              accept=".jpg, .jpeg, .png, .gif, .webp"
               onChange={handleImageUpload}
               className="input-file"
+              name="image"
             /></button>
           </div>
         </div>}
@@ -141,12 +159,7 @@ export default function ModalWindow({closeModal}){
               setStep(1)
             }} className="back" icon={faArrowLeft} />
             <h2>Создание публикации</h2>
-            <a onClick={() => {
-              setSelectedImage(null)
-              setSelectFilter(null)
-              setDescription('')
-              closeModal()
-            }}>Поделиться</a>
+            <a onClick={sendPost}>Поделиться</a>
           </div>
           <div className="edit_post_space flex">
             <div className="edit_post_image">

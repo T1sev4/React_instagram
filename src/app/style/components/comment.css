@@ -55,7 +55,7 @@
   display: block;
   padding: 15px 0;
   cursor: pointer;
-  color: #ed4956;
+  color: #ed4956 !important; 
   text-decoration: none;
 }
 .comment_modal_delete_wrapper p{

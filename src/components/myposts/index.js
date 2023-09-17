@@ -1,7 +1,6 @@
 import MyPost from "./mypost"
 
 export default function MyPosts({userPosts, openModal}){
-  console.log(userPosts, 'posts')
   return(
     <div className="posts">
       <div className="posts_inner container">
