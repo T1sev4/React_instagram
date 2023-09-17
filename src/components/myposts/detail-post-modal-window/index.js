@@ -5,7 +5,7 @@ import {faHeart} from '@fortawesome/free-regular-svg-icons';
 import {faBookmark} from '@fortawesome/free-regular-svg-icons';
 import Comment from "./comment";
 import { useState } from "react";
-
+import { END_POINT } from "@/config/end-point";
 
 export default function DetailPostMD({closeModal, currentPost}){
   const [comment, setComment] = useState('');
@@ -38,7 +38,7 @@ export default function DetailPostMD({closeModal, currentPost}){
       <button onClick={closeModal} className="modal_close_btn"><FontAwesomeIcon icon={faXmark} /></button>
       <div className="detail_modal_window">
         <div className="detail_modal_left">
-          <img src={currentPost.image} alt="" />
+          <img src={`${END_POINT}/${currentPost.image}`} alt="" />
         </div>
         <div className="detail_modal_right">
           <div className="detail_modal_header flex flex-ai-c flex-jc-sb">
@@ -49,7 +49,7 @@ export default function DetailPostMD({closeModal, currentPost}){
             <FontAwesomeIcon icon={faEllipsis} />
           </div>
           <div className="detail_modal_comments">
-          {currentPost.description && <Comment item={currentPost} remove={remove} />}
+          {currentPost.description && <Comment currentPost={currentPost} remove={remove} />}
             {comments.map((item, index) => (<Comment item={item} remove={remove} key={index} />))}
             
           </div>

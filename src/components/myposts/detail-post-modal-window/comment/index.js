@@ -5,7 +5,7 @@ import {faEllipsis} from '@fortawesome/free-solid-svg-icons';
 
 import { useState } from "react";
 
-export default function Comment({item, remove}){
+export default function Comment({item, remove, currentPost}){
 
   const [isModal, setModal] = useState(false);
 
@@ -14,7 +14,8 @@ export default function Comment({item, remove}){
       <div className="comment_box">
         <div className="flex flex-ai-c">
           <img src="/images/posts/post2.jpg"  alt=""/>
-          <p className="comment_text"><span>terrylucas</span> {item.description}</p>
+         {currentPost && <p className="comment_text"><span>terrylucas</span> {currentPost.description}</p>}
+         {item && <p className="comment_text"><span>terrylucas</span> {item.comment}</p>}
         </div>
         <div className="comment_info">
           <FontAwesomeIcon onClick={() => setModal(true)} icon={faEllipsis} />
