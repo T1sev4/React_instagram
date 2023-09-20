@@ -69,6 +69,13 @@
 .comment_modal_delete_wrapper p:last-child{
   color: #fff;
 }
+.edit_post_modal p:first-child{
+  color: #fff;
+}
+.edit_post_modal p:last-child{
+  border-bottom: 1px solid rgb(54, 54, 54);
+  color: #ed4956;
+}
 
 @keyframes show{
   from{

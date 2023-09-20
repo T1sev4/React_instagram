@@ -6,11 +6,11 @@ import {faBookmark} from '@fortawesome/free-regular-svg-icons';
 import Comment from "./comment";
 import { useState } from "react";
 import { END_POINT } from "@/config/end-point";
-
-export default function DetailPostMD({closeModal, currentPost}){
+import Link from "next/link";
+export default function DetailPostMD({currentPost, openEditModalWindow}){
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
-
+  const [isModal, setIsModal] = useState(false)
   function createComment(e){
     setComment(e.target.value)
   }
@@ -35,7 +35,9 @@ export default function DetailPostMD({closeModal, currentPost}){
 
   return(
     <div className="modal_window">
-      <button onClick={closeModal} className="modal_close_btn"><FontAwesomeIcon icon={faXmark} /></button>
+      <Link href="/profile">
+        <button className="modal_close_btn"><FontAwesomeIcon icon={faXmark} /></button>
+      </Link> 
       <div className="detail_modal_window">
         <div className="detail_modal_left">
           <img src={`${END_POINT}${currentPost.image}`} alt="" />
@@ -46,7 +48,15 @@ export default function DetailPostMD({closeModal, currentPost}){
               <img src="/images/posts/post2.jpg"  alt=""/>
               <h4>terrylucas</h4>
             </div>
-            <FontAwesomeIcon icon={faEllipsis} />
+            <FontAwesomeIcon icon={faEllipsis} onClick={() => {setIsModal(true)}} />
+            {isModal && <div className="comment_modal_delete">
+              <div className="comment_modal_delete_bg" onClick={() => {setIsModal(false)}}></div>
+              <div className="comment_modal_delete_wrapper edit_post_modal">
+                <p>Редактировать</p>
+                <p>Удалить</p>
+              </div>
+            </div>}
+
           </div>
           <div className="detail_modal_comments">
           {currentPost.description && <Comment currentPost={currentPost} remove={remove} />}

@@ -1,8 +1,11 @@
 import { END_POINT } from "@/config/end-point"
-export default function MyPost({post, openModal}){
+import Link from "next/link"
+export default function MyPost({post}){
   return(
-    <div onClick={() => {openModal(post)}} className="post">
-      <img src={`${END_POINT}${post.image}`} alt="" />
+    <div className="post">
+      <Link href={`/profile/${post.id}`}>
+        <img src={`${END_POINT}${post.image}`} alt="" />
+      </Link>
     </div>
   )
 }

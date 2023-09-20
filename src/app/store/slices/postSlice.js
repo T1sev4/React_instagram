@@ -6,12 +6,17 @@ import jwt_decode from "jwt-decode";
 export const postSlice = createSlice({
   name: 'post',
   initialState:{
-    posts: []
+    posts: [],
+    post: {}
   },
   reducers: {
     setMyPosts: (state, action) => {
       state.posts = action.payload.posts
     },
+    setPost: (state, action) => {
+      state.post = action.payload.post
+    },
+    
     appendPost: (state, action) => {
       state.posts = [...state.posts, action.payload.newpost]
     },
@@ -20,12 +25,17 @@ export const postSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setMyPosts, appendPost } = postSlice.actions
+export const { setMyPosts, appendPost, setPost } = postSlice.actions
 
 
 export const getMyPosts = () => (dispatch) => {
   axios.get(`${END_POINT}/api/post/getAllUserPosts`).then(res => {
     dispatch(setMyPosts({posts: res.data}))
+  })
+}
+export const getPostById = (id) => (dispatch) => {
+  axios.get(`${END_POINT}/api/post/getPostByID/${id}`).then(res => {
+    dispatch(setPost({post: res.data}))
   })
 }
 

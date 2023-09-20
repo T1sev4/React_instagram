@@ -8,7 +8,7 @@ import { getMyPosts } from '@/app/store/slices/postSlice';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation'
 
-export default function Profile({openFollowers, openModal, followers, openFollowing}){
+export default function MyProfile({openFollowers, followers, openFollowing}){
   const router = useRouter()
   const dispatch = useDispatch()
   const userPosts = useSelector((state) => state.post.posts)
@@ -28,7 +28,6 @@ export default function Profile({openFollowers, openModal, followers, openFollow
   }
 
   useEffect(didMount, [])
-
 
   return(
     <div className="profile">
@@ -61,7 +60,7 @@ export default function Profile({openFollowers, openModal, followers, openFollow
             </div>
           </div>}
         </div>
-        <MyPosts openModal={openModal} userPosts = {userPosts} />
+        <MyPosts userPosts = {userPosts} />
       </div>
     </div>
   )
