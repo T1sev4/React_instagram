@@ -14,7 +14,7 @@ export default function MyProfile({openFollowers, followers, openFollowing}){
   const userPosts = useSelector((state) => state.post.posts)
   const isAuth = useSelector((state) => state.auth.isAuth)
   const user = useSelector((state) => state.auth.currentUser)
-
+  const [loading, setLoading] = useState(true);  // Состояние для отслеживания загрузки данных
 
   useEffect(() => {
     if(!isAuth) router.push('/')
@@ -25,13 +25,24 @@ export default function MyProfile({openFollowers, followers, openFollowing}){
 
   const didMount = () => {
     dispatch(getMyPosts())
+  
   }
 
   useEffect(didMount, [])
+  
+  useEffect(() => {
+    setLoading(false);
+  }, [userPosts])
+
+
+  
+
+
+
 
   return(
     <div className="profile">
-      <div className="profile_inner container">
+      {!loading && <div className="profile_inner container">
         <div className="profile_person flex flex-ai-c">
           <div className="profile_avatar">
             <img src="/images/posts/post2.jpg" alt="" />
@@ -61,7 +72,7 @@ export default function MyProfile({openFollowers, followers, openFollowing}){
           </div>}
         </div>
         <MyPosts userPosts = {userPosts} />
-      </div>
+      </div>}
     </div>
   )
 }

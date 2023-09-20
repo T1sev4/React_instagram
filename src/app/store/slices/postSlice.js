@@ -16,11 +16,9 @@ export const postSlice = createSlice({
     setPost: (state, action) => {
       state.post = action.payload.post
     },
-    
     appendPost: (state, action) => {
       state.posts = [...state.posts, action.payload.newpost]
     },
-    
   },
 })
 
@@ -44,6 +42,15 @@ export const createPost = (data) => async (dispatch) => {
     axios.post(`${END_POINT}/api/post/newPost`, data).then(res => {
       dispatch(appendPost({newpost: res.data}))
     })
+  } catch (error) {
+    console.log(error);
+    alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")
+  }
+}
+export const editPost = (data, router) => async (dispatch) => {
+  try {
+    axios.put(`${END_POINT}/api/post/editPost`, data)
+    router.push('/profile')
   } catch (error) {
     console.log(error);
     alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")

@@ -52,7 +52,7 @@ export default function DetailPostMD({currentPost, openEditModalWindow}){
             {isModal && <div className="comment_modal_delete">
               <div className="comment_modal_delete_bg" onClick={() => {setIsModal(false)}}></div>
               <div className="comment_modal_delete_wrapper edit_post_modal">
-                <p>Редактировать</p>
+                <p onClick={openEditModalWindow}>Редактировать</p>
                 <p>Удалить</p>
               </div>
             </div>}

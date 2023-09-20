@@ -103,7 +103,6 @@ export default function ModalWindow({closeModal}){
     const formData = new FormData();
     formData.append('image', image);  // 'image' - это имя поля в вашем бэкенде
     formData.append('description', description);  // если у вас есть другие поля
-
     dispatch(createPost(formData))
     setSelectedImage(null)
     setSelectFilter(null)
