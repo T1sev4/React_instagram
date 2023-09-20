@@ -7,7 +7,12 @@ import Comment from "./comment";
 import { useState } from "react";
 import { END_POINT } from "@/config/end-point";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { deletePost } from "@/app/store/slices/postSlice";
+import { useRouter } from "next/navigation";
 export default function DetailPostMD({currentPost, openEditModalWindow}){
+  const dispatch = useDispatch()
+  const router = useRouter()
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [isModal, setIsModal] = useState(false)
@@ -53,7 +58,10 @@ export default function DetailPostMD({currentPost, openEditModalWindow}){
               <div className="comment_modal_delete_bg" onClick={() => {setIsModal(false)}}></div>
               <div className="comment_modal_delete_wrapper edit_post_modal">
                 <p onClick={openEditModalWindow}>Редактировать</p>
-                <p>Удалить</p>
+                <p onClick={() => {
+                  dispatch(deletePost(currentPost.id))
+                  router.push('/profile')
+                }}>Удалить</p>
               </div>
             </div>}
 

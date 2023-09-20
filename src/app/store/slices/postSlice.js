@@ -19,11 +19,16 @@ export const postSlice = createSlice({
     appendPost: (state, action) => {
       state.posts = [...state.posts, action.payload.newpost]
     },
+    handleDeletePost: (state, action) => {
+      let posts = [...state.posts];
+      posts = posts.filter(item => item.id !== action.payload)
+      state.posts = posts
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setMyPosts, appendPost, setPost } = postSlice.actions
+export const { setMyPosts, appendPost, setPost, handleDeletePost } = postSlice.actions
 
 
 export const getMyPosts = () => (dispatch) => {
@@ -56,7 +61,15 @@ export const editPost = (data, router) => async (dispatch) => {
     alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")
   }
 }
-
+export const deletePost = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`${END_POINT}/api/post/deletePostByID/${id}`)
+    dispatch(handleDeletePost(id));
+  } catch (error) {
+    console.log(error);
+    alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")
+  }
+}
 
 
 export default postSlice.reducer
