@@ -16,6 +16,9 @@ export const postSlice = createSlice({
     setPost: (state, action) => {
       state.post = action.payload.post
     },
+    setUsersPosts: (state, action) => {
+      state.posts = action.payload.posts
+    },
     appendPost: (state, action) => {
       state.posts = [...state.posts, action.payload.newpost]
     },
@@ -28,12 +31,17 @@ export const postSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setMyPosts, appendPost, setPost, handleDeletePost } = postSlice.actions
+export const { setMyPosts, appendPost, setPost, handleDeletePost, setUsersPosts } = postSlice.actions
 
 
 export const getMyPosts = () => (dispatch) => {
   axios.get(`${END_POINT}/api/post/getAllUserPosts`).then(res => {
     dispatch(setMyPosts({posts: res.data}))
+  })
+}
+export const getUsersPosts = () => (dispatch) => {
+  axios.get(`${END_POINT}/api/post/getAllUsersPosts`).then(res => {
+    dispatch(setUsersPosts({posts: res.data}))
   })
 }
 export const getPostById = (id) => (dispatch) => {

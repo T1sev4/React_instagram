@@ -4,7 +4,7 @@ import {faEllipsis} from '@fortawesome/free-solid-svg-icons';
 import {faHeart} from '@fortawesome/free-regular-svg-icons';
 import {faBookmark} from '@fortawesome/free-regular-svg-icons';
 import Comment from "./comment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { END_POINT } from "@/config/end-point";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
@@ -16,6 +16,15 @@ export default function DetailPostMD({currentPost, openEditModalWindow}){
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [isModal, setIsModal] = useState(false)
+  const [url, setUrl] = useState('')
+  useEffect(() => {
+    let currentUrl = window.location.href;
+    currentUrl = currentUrl.split('/');
+    currentUrl = currentUrl[currentUrl.length - 2]
+    setUrl(currentUrl)
+  }, [])
+  
+
   function createComment(e){
     setComment(e.target.value)
   }
@@ -38,11 +47,19 @@ export default function DetailPostMD({currentPost, openEditModalWindow}){
     setComments(com)
   }
 
+
   return(
     <div className="modal_window">
-      <Link href="/profile">
-        <button className="modal_close_btn"><FontAwesomeIcon icon={faXmark} /></button>
-      </Link> 
+      
+      {url === 'home' &&
+        <Link href="/home">
+          <button className="modal_close_btn"><FontAwesomeIcon icon={faXmark} /></button>
+        </Link>} 
+      {url === 'profile' &&
+        <Link href="/profile">
+          <button className="modal_close_btn"><FontAwesomeIcon icon={faXmark} /></button>
+        </Link>} 
+      
       <div className="detail_modal_window">
         <div className="detail_modal_left">
           <img src={`${END_POINT}${currentPost.image}`} alt="" />
@@ -75,6 +92,7 @@ export default function DetailPostMD({currentPost, openEditModalWindow}){
             <FontAwesomeIcon icon={faHeart}/>
             <FontAwesomeIcon icon={faBookmark} />
           </div>
+          {currentPost.Likes && <p className="detail_post_info">{currentPost.Likes.length} отметок "Нравится"</p>}
           <div className="comment_form">
             <svg aria-label="Смайлик" className="x1lliihq x1n2onr6" color="rgb(168, 168, 168)" fill="rgb(168, 168, 168)" height="20" role="img" viewBox="0 0 24 24" width="20"><title>Смайлик</title><path d="M15.83 10.997a1.167 1.167 0 1 0 1.167 1.167 1.167 1.167 0 0 0-1.167-1.167Zm-6.5 1.167a1.167 1.167 0 1 0-1.166 1.167 1.167 1.167 0 0 0 1.166-1.167Zm5.163 3.24a3.406 3.406 0 0 1-4.982.007 1 1 0 1 0-1.557 1.256 5.397 5.397 0 0 0 8.09 0 1 1 0 0 0-1.55-1.263ZM12 .503a11.5 11.5 0 1 0 11.5 11.5A11.513 11.513 0 0 0 12 .503Zm0 21a9.5 9.5 0 1 1 9.5-9.5 9.51 9.51 0 0 1-9.5 9.5Z"></path></svg>
             <input onChange={createComment} value={comment} type="text" placeholder="Добавьте комментарий..." />

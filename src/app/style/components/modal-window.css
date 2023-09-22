@@ -184,7 +184,7 @@
   object-fit: cover;
 }
 .detail_modal_comments{
-  height: 80%;
+  height: 70%;
   /* overflow-y: scroll; */
 }
 .comment_form{
