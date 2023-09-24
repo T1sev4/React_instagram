@@ -7,16 +7,27 @@ import Comment from "./comment";
 import { useEffect, useState } from "react";
 import { END_POINT } from "@/config/end-point";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deletePost } from "@/app/store/slices/postSlice";
 import { useRouter } from "next/navigation";
+import { getCommentsByPostId, createComment } from "@/app/store/slices/commentSlice";
 export default function DetailPostMD({currentPost, openEditModalWindow}){
   const dispatch = useDispatch()
   const router = useRouter()
+
+  
+
+  const commentsDB = useSelector(state => state.comment.comments)
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [isModal, setIsModal] = useState(false)
   const [url, setUrl] = useState('')
+
+  useEffect(() => {
+    console.log(currentPost, 'current post')
+    dispatch(getCommentsByPostId({postId: currentPost.id}))
+  }, [currentPost])
+
   useEffect(() => {
     let currentUrl = window.location.href;
     currentUrl = currentUrl.split('/');

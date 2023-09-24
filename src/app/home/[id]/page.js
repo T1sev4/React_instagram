@@ -20,7 +20,7 @@ export default function Profile() {
   const {id} = useParams();
   const [currentPost, setCurrentPost] = useState({})
   const post = useSelector(state => state.post.post)
-  console.log(post)
+ 
   const didMount = () => {
     dispatch(getPostById(id))
   }
@@ -35,8 +35,8 @@ export default function Profile() {
   return (
     <main>
       <Header openModal={() => setModalOpen(true)} />
-      <NewsFeed />
-      <DetailPostMD currentPost={currentPost} openEditModalWindow={() => setIsEditModalWindow(true)} />
+      {/* <NewsFeed /> */}
+      {currentPost && currentPost.id && <DetailPostMD currentPost={currentPost} openEditModalWindow={() => setIsEditModalWindow(true)} />}
       {isEditModalWindow && <EditPostModalWindow closeModal={() => setIsEditModalWindow(false)} />}
     </main>
   )
