@@ -34,6 +34,9 @@ export default function MyProfile({openFollowers, followers, openFollowing}){
     setLoading(false);
   }, [userPosts])
 
+  useEffect(() => {
+    return setLoading(true)
+  }, [])
 
   
 

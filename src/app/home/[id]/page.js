@@ -35,7 +35,7 @@ export default function Profile() {
   return (
     <main>
       <Header openModal={() => setModalOpen(true)} />
-      {/* <NewsFeed /> */}
+      <NewsFeed />
       {currentPost && currentPost.id && <DetailPostMD currentPost={currentPost} openEditModalWindow={() => setIsEditModalWindow(true)} />}
       {isEditModalWindow && <EditPostModalWindow closeModal={() => setIsEditModalWindow(false)} />}
     </main>

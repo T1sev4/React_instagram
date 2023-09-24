@@ -53,7 +53,7 @@ export default function Profile() {
     <main>
       <Header openModal={() => setModalOpen(true)} />
       <MyProfile followers={followers} openFollowers={() => setModalFollowers(true)} openFollowing={() => setModalFollowing(true)}/>
-      <DetailPostMD currentPost={currentPost} openEditModalWindow={() => setIsEditModalWindow(true)} />
+      {currentPost && currentPost.id && <DetailPostMD currentPost={currentPost} openEditModalWindow={() => setIsEditModalWindow(true)} />}
       {isEditModalWindow && <EditPostModalWindow closeModal={() => setIsEditModalWindow(false)} />}
     </main>
   )

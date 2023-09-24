@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 .modal_close_btn{
   background: none;
@@ -22,6 +23,19 @@
   background-color: #fff;
   height: 80vh;
   text-align: center;
+ 
+}
+.detail_modal_window{
+  animation: showModal 0.1s linear;
+}
+
+@keyframes showModal {
+  0%{
+    transform: scale(1.1);
+  }
+  100%{
+    transform: scale(1);
+  }
 }
 .content h2{
   border-bottom: 1px solid #ddd;
@@ -185,7 +199,7 @@
 }
 .detail_modal_comments{
   height: 70%;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
 }
 .comment_form{
   display: flex;

@@ -2,7 +2,6 @@ import Stories from "./stories"
 import News from "./news"
 import Suggestions from "./suggestions"
 export default function NewsFeed(){
-
   return (
     <div className="NewsFeed">
       <div className="container">

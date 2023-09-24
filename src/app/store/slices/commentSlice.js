@@ -12,29 +12,32 @@ export const commentSlice = createSlice({
       state.comments = action.payload.comments
     },
     appendComment: (state, action) => {
-      state.comments = [...state.posts, action.payload.comments]
+      state.comments = [...state.comments, action.payload.comment]
     },
+    handleDeleteComment: (state, action) => {
+      let comments = [...state.comments];
+      comments = comments.filter(item => item.id !== action.payload)
+      state.comments = comments
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const {  setComments, appendComment } = commentSlice.actions
+export const {  setComments, appendComment, handleDeleteComment } = commentSlice.actions
 
-export const getCommentsByPostId = (data) => (dispatch) => {
-  console.log(data, 'data')
-
-    axios.get(`${END_POINT}/api/getComments`, data).then(res => {
-      console.log(res.data)
+export const getCommentsByPostId = (id) => (dispatch) => {
+    axios.get(`${END_POINT}/api/getComments/${id}`).then(res => {
       dispatch(setComments({comments: res.data}))
     })
-  
- 
 }
 
-export const createComment = async (data) => async (dispatch) => {
+export const createComment = (data) => async (dispatch) => {
+  console.log(data)
   try {
     axios.post(`${END_POINT}/api/newComment`, data).then(res => {
-      dispatch(appendComment({comments: res.data}))
+      console.log(res)
+      console.log(res.data, 'res data')
+      dispatch(appendComment({comment: res.data}))
     })
   } catch (error) {
     console.log(error);
@@ -50,15 +53,15 @@ export const createComment = async (data) => async (dispatch) => {
 //     alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")
 //   }
 // }
-// export const deletePost = (id) => async (dispatch) => {
-//   try {
-//     const res = await axios.delete(`${END_POINT}/api/post/deletePostByID/${id}`)
-//     dispatch(handleDeletePost(id));
-//   } catch (error) {
-//     console.log(error);
-//     alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")
-//   }
-// }
+export const deleteComment = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`${END_POINT}/api/deleteComment/${id}`)
+    dispatch(handleDeleteComment(id));
+  } catch (error) {
+    console.log(error);
+    alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")
+  }
+}
 
 
 export default commentSlice.reducer
