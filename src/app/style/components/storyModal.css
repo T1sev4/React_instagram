@@ -38,7 +38,7 @@
   background-color: #fff;
   border-radius: 50px;
   height: 3px;
-  animation: lineFill 5s linear;
+  animation: lineFill 60s linear;
 }
 .storyHeader{
   position: absolute;
