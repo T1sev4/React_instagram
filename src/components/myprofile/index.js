@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faEllipsis} from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import MyPosts from "../myposts"
 import { useSelector , useDispatch } from 'react-redux'
 import { logOut } from '@/app/store/slices/authSlice';
@@ -8,7 +9,7 @@ import { getMyPosts } from '@/app/store/slices/postSlice';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation'
 
-export default function MyProfile({openFollowers, followers, openFollowing}){
+export default function MyProfile({openModalCreateStory, openFollowers, followers, openFollowing}){
   const router = useRouter()
   const dispatch = useDispatch()
   const userPosts = useSelector((state) => state.post.posts)
@@ -49,6 +50,9 @@ export default function MyProfile({openFollowers, followers, openFollowing}){
         <div className="profile_person flex flex-ai-c">
           <div className="profile_avatar">
             <img src="/images/posts/post2.jpg" alt="" />
+            <div className='addStoriesIcon' onClick={openModalCreateStory}>
+              <FontAwesomeIcon icon={faPlus} />
+            </div>
           </div>
           <div className="profile_text">
             <div className="profile_name_big flex flex-ai-c gap8">

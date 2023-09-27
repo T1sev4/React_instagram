@@ -6,9 +6,10 @@ import ModalWindow from "@/components/modal-window-create-post"
 import DetailPostMD from "@/components/myposts/detail-post-modal-window"
 import Followers from "@/components/followers"
 import { useState } from 'react';
-
+import ModalWindowCreateStory from "@/components/modal-window-create-story"
 export default function Profile() {
   const [isModalOpen, setModalOpen] = useState(false); // Состояние для модального окна
+  const [isModalCreateStory, setModalCreateStory] = useState(false); // Состояние для модального окна
   const [isModalFollowers, setModalFollowers] = useState(false); 
   const [isModalFollowing, setModalFollowing] = useState(false); 
   
@@ -33,8 +34,9 @@ export default function Profile() {
   return (
     <main>
       <Header openModal={() => setModalOpen(true)} />
-      <MyProfile followers={followers} openFollowers={() => setModalFollowers(true)} openFollowing={() => setModalFollowing(true)} />
+      <MyProfile openModalCreateStory={() => {setModalCreateStory(true)}} followers={followers} openFollowers={() => setModalFollowers(true)} openFollowing={() => setModalFollowing(true)} />
       {isModalOpen && <ModalWindow closeModal={() => setModalOpen(false)} />}
+      {isModalCreateStory && <ModalWindowCreateStory closeModal={() => {setModalCreateStory(false)}} />}
       {/* {isModalDetailOpen && <DetailPostMD currentPost={currentPost} closeModal={() => setModalDetailOpen(false)} />} */}
       {isModalFollowers && <Followers title="Followers" followers={followers} close={() => setModalFollowers(false)} />}
       {isModalFollowing && <Followers title="Following" followers={followers} close={() => setModalFollowing(false)} />}

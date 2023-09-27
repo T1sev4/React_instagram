@@ -10,7 +10,6 @@ export default function Stories({onClick}){
   const [timerId, setTimerId] = useState(null);
   
   const storiesArray = useSelector(state => state.story.stories)
-  console.log(storiesArray)
 
   useEffect(() => {
     dispatch(getMyStories())
