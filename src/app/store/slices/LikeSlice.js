@@ -14,16 +14,16 @@ export const likeSlice = createSlice({
     appendLike: (state, action) => {
       state.likes = [...state.likes, action.payload.like]
     },
-    // handleDeletePost: (state, action) => {
-    //   let posts = [...state.posts];
-    //   posts = posts.filter(item => item.id !== action.payload)
-    //   state.posts = posts
-    // }
+    handleDeleteLike: (state, action) => {
+      let likes = [...state.likes];
+      likes = likes.filter(item => item.id !== action.payload)
+      state.likes = likes
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setLikes, appendLike } = likeSlice.actions
+export const { setLikes, appendLike, handleDeleteLike } = likeSlice.actions
 
 
 export const getPostLikes = (id) => (dispatch) => {
@@ -43,15 +43,15 @@ export const createPostLike = (id) => async (dispatch) => {
   }
 }
 
-// export const deletePost = (id) => async (dispatch) => {
-//   try {
-//     const res = await axios.delete(`${END_POINT}/api/post/deletePostByID/${id}`)
-//     dispatch(handleDeletePost(id));
-//   } catch (error) {
-//     console.log(error);
-//     alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")
-//   }
-// }
+export const deleteLike = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`${END_POINT}/api/like/remove-like/${id}`)
+    dispatch(handleDeleteLike(id));
+  } catch (error) {
+    console.log(error);
+    alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")
+  }
+}
 
 
 export default likeSlice.reducer
