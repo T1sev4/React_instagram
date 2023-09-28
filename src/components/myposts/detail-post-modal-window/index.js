@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deletePost } from "@/app/store/slices/postSlice";
 import { useRouter } from "next/navigation";
 import { getCommentsByPostId, createComment, deleteComment } from "@/app/store/slices/commentSlice";
-import { getPostLikes } from "@/app/store/slices/LikeSlice";
+import { getPostLikes, createPostLike } from "@/app/store/slices/LikeSlice";
 
 export default function DetailPostMD({currentPost, openEditModalWindow}){
   const dispatch = useDispatch()
@@ -64,6 +64,10 @@ export default function DetailPostMD({currentPost, openEditModalWindow}){
   const remove = (Comment) => {
     dispatch(deleteComment(Comment.id))
   }
+
+  const createLikeForPost = (id) => {
+    dispatch(createPostLike(id))
+  }
   
   console.log(likes.some(obj => obj.userId === user.id))
   return(
@@ -108,7 +112,7 @@ export default function DetailPostMD({currentPost, openEditModalWindow}){
           </div>
           <div className="detail_post_info flex flex-ai-c flex-jc-sb">
 
-            {likes.some(obj => obj.userId === user.id) ? <FontAwesomeIcon className="myIcons liked" icon={faHeart}/> : <FontAwesomeIcon className="myIcons" icon={faHeart}/>}
+            {likes.some(obj => obj.userId === user.id) ? <FontAwesomeIcon className="myIcons liked" icon={faHeart}/> : <FontAwesomeIcon onClick={() => createLikeForPost(currentPost.id)} className="myIcons" icon={faHeart}/>}
             <FontAwesomeIcon className="myIcons" icon={faBookmark} />
           </div>
           {likes && <p className="detail_post_info">{likes.length} отметок "Нравится"</p>}

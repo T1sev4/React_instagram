@@ -110,6 +110,10 @@ h3{
   color: rgba(0, 0, 0, 0.8);
   transform: scale(0.9);
 }
+.liked:hover{
+  color: #ff0000;
+  transform: scale(0.9);
+}
 .liked{
   color: #ff0000;
 }
