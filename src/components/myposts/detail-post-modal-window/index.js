@@ -66,14 +66,11 @@ export default function DetailPostMD({currentPost, openEditModalWindow}){
     dispatch(deleteComment(Comment.id))
   }
 
-  const createLikeForPost = (id) => {
-    dispatch(createPostLike(id))
-  }
 
   useEffect(() => {
    setLike(likes.filter(obj => obj.userId === user.id))
   }, [likes])
-  
+
   return(
     <div className="modal_window">
       
@@ -116,7 +113,7 @@ export default function DetailPostMD({currentPost, openEditModalWindow}){
           </div>
           <div className="detail_post_info flex flex-ai-c flex-jc-sb">
 
-            {like && like.length > 0 ? <FontAwesomeIcon onClick={() => {dispatch(deleteLike(like[0].id))}} className="myIcons liked" icon={faHeart}/> : <FontAwesomeIcon onClick={() => createLikeForPost(currentPost.id)} className="myIcons" icon={faHeart}/>}
+            {like && like.length > 0 ? <FontAwesomeIcon onClick={() => {dispatch(deleteLike(like[0].id))}} className="myIcons liked" icon={faHeart}/> : <FontAwesomeIcon onClick={() => dispatch(createPostLike(currentPost.id))} className="myIcons" icon={faHeart}/>}
             <FontAwesomeIcon className="myIcons" icon={faBookmark} />
           </div>
           {likes && <p className="detail_post_info">{likes.length} отметок "Нравится"</p>}

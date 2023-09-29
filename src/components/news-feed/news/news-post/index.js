@@ -1,12 +1,27 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faEllipsis} from '@fortawesome/free-solid-svg-icons';
-import {faHeart} from '@fortawesome/free-regular-svg-icons';
+import {faHeart} from '@fortawesome/free-solid-svg-icons';
 import {faComment} from '@fortawesome/free-regular-svg-icons';
 import {faBookmark} from '@fortawesome/free-regular-svg-icons';
 import { END_POINT } from '@/config/end-point';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPostLikes, createPostLike, deleteLike } from '@/app/store/slices/LikeSlice';
+import { getUsersPosts } from '@/app/store/slices/postSlice';
 export default function NewsPost({save, comment, onChange, post}){
-  
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.auth.currentUser)
+  // const likes = useSelector(state => state.like.likes)
+  // console.log(likes)
+  const [like, setLike] = useState()
+  // useEffect(() => {
+  //   dispatch(getPostLikes(post.id))
+  // }, [post])
+
+  useEffect(() => {
+    setLike(post.Likes.filter(obj => obj.userId === user.id))
+  }, [post])
 
 
   return(
@@ -24,7 +39,8 @@ export default function NewsPost({save, comment, onChange, post}){
       <div>
         <div className='newPost_icon flex flex-jc-sb flex-ai-c'>
           <div className='flex gap2'>
-            <FontAwesomeIcon className='myIcons' icon={faHeart} />
+            {/* <FontAwesomeIcon className='myIcons' icon={faHeart} /> */}
+            {like && like.length > 0 ? <FontAwesomeIcon onClick={() => {dispatch(deleteLike(like[0].id))}} className="myIcons liked" icon={faHeart}/> : <FontAwesomeIcon onClick={() => dispatch(createPostLike(post.id))} className="myIcons" icon={faHeart}/>}
             <Link href={`/home/${post.id}`}>
               <FontAwesomeIcon className='myIcons' icon={faComment} />
             </Link>
