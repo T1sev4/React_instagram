@@ -8,7 +8,7 @@ import { END_POINT } from "@/config/end-point"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { deleteStory } from "@/app/store/slices/storySlice";
-import { getStoryLikes } from "@/app/store/slices/LikeSlice";
+import { getStoryLikes, createStoryLike, deleteLike } from "@/app/store/slices/LikeSlice";
 
 export default function ModalWindowStory({ story, onClose }){
   const dispatch = useDispatch()
@@ -73,7 +73,7 @@ export default function ModalWindowStory({ story, onClose }){
           <input type="text" placeholder={`ответьте ${story.userId}`} />
           <div className="flex flex-ai-c gap1">
             <p className="storyLikesCount">{likes.length}</p>
-            {like && like.length > 0 ? <FontAwesomeIcon onClick={() => {}} className="myIcons liked" icon={faHeart}/> : <FontAwesomeIcon onClick={() => {}} className="myIcons" icon={faHeart}/>}
+            {like && like.length > 0 ? <FontAwesomeIcon onClick={() => {dispatch(deleteLike(like[0].id))}} className="myIcons storyIcon liked" icon={faHeart}/> : <FontAwesomeIcon onClick={() => {dispatch(createStoryLike(story.id))}} className="myIcons storyIcon" icon={faHeart}/>}
           </div>
           <FontAwesomeIcon  className="storyActionIcon" icon={faPaperPlane} />
         </div>

@@ -104,7 +104,11 @@ h3{
 }
 .myIcons{
   cursor: pointer;
+  font-size: 24px;
   transition: .2s;
+}
+.storyIcon{
+  color: #fff;
 }
 .myIcons:hover{
   /* color: rgba(0, 0, 0, 0.8); */
