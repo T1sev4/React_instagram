@@ -12,8 +12,8 @@
   object-fit: cover;
   border-radius: 50%;
 }
-.storyLikesCount{
-  color: #fff;
+.LikesCount{
   font-size: 16px;
   font-weight: 600;
 }
+

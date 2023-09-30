@@ -72,7 +72,7 @@ export default function ModalWindowStory({ story, onClose }){
         <div className="storyAction flex flex-ai-c gap2">
           <input type="text" placeholder={`ответьте ${story.userId}`} />
           <div className="flex flex-ai-c gap1">
-            <p className="storyLikesCount">{likes.length}</p>
+            <p style={{color: '#fff'}} className="LikesCount ">{likes.length}</p>
             {like && like.length > 0 ? <FontAwesomeIcon onClick={() => {dispatch(deleteLike(like[0].id))}} className="myIcons storyIcon liked" icon={faHeart}/> : <FontAwesomeIcon onClick={() => {dispatch(createStoryLike(story.id))}} className="myIcons storyIcon" icon={faHeart}/>}
           </div>
           <FontAwesomeIcon  className="storyActionIcon" icon={faPaperPlane} />
