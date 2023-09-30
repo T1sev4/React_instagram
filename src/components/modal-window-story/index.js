@@ -2,17 +2,27 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {faEllipsis} from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from "@fortawesome/free-solid-svg-icons"
-import { faHeart } from "@fortawesome/free-regular-svg-icons"
+import { faHeart } from "@fortawesome/free-solid-svg-icons"
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons"
 import { END_POINT } from "@/config/end-point"
 import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteStory } from "@/app/store/slices/storySlice";
+import { getStoryLikes } from "@/app/store/slices/LikeSlice";
+
 export default function ModalWindowStory({ story, onClose }){
   const dispatch = useDispatch()
   const [isVideo, setVideo] = useState(false)
   const [isModal, setModal] = useState(false)
-  
+  const user = useSelector((state) => state.auth.currentUser)
+  const likes = useSelector(state => state.like.likes)
+  const [like, setLike] = useState()
+
+
+  useEffect(() => {
+    dispatch(getStoryLikes(story.id))
+  }, [story])
+
   useEffect(() => {
     if(story.video.substring(8, 15) == 'stories'){
       setVideo(true)
@@ -24,6 +34,11 @@ export default function ModalWindowStory({ story, onClose }){
       }
     }
   }, [story])
+
+
+  useEffect(() => {
+    setLike(likes.filter(obj => obj.userId === user.id))
+   }, [likes])
 
   return(
     <div className="story-modal">
@@ -56,7 +71,10 @@ export default function ModalWindowStory({ story, onClose }){
           </video>}
         <div className="storyAction flex flex-ai-c gap2">
           <input type="text" placeholder={`ответьте ${story.userId}`} />
-          <FontAwesomeIcon className="storyActionIcon" icon={faHeart} />
+          <div className="flex flex-ai-c gap1">
+            <p className="storyLikesCount">{likes.length}</p>
+            {like && like.length > 0 ? <FontAwesomeIcon onClick={() => {}} className="myIcons liked" icon={faHeart}/> : <FontAwesomeIcon onClick={() => {}} className="myIcons" icon={faHeart}/>}
+          </div>
           <FontAwesomeIcon  className="storyActionIcon" icon={faPaperPlane} />
         </div>
       </div>

@@ -31,10 +31,25 @@ export const getPostLikes = (id) => (dispatch) => {
     dispatch(setLikes({likes: res.data}))
   })
 }
+export const getStoryLikes = (id) => (dispatch) => {
+  axios.get(`${END_POINT}/api/like/get-likes-by-story/${id}`).then(res => {
+    dispatch(setLikes({likes: res.data}))
+  })
+}
 
 export const createPostLike = (id) => async (dispatch) => {
   try {
     axios.post(`${END_POINT}/api/like/add-like-to-post/${id}`).then(res => {
+      dispatch(appendLike({like: res.data}))
+    })
+  } catch (error) {
+    console.log(error);
+    alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")
+  }
+}
+export const createStoryLike = (id) => async (dispatch) => {
+  try {
+    axios.post(`${END_POINT}/api/like/add-like-to-story/${id}`).then(res => {
       dispatch(appendLike({like: res.data}))
     })
   } catch (error) {
