@@ -22,11 +22,11 @@ export const subscriptionSlice = createSlice({
     appendFollowings: (state, action) => {
       state.followings = [...state.followings, action.payload.newsubscription]
     },
-    // handleDeleteStory: (state, action) => {
-    //   let stories = [...state.stories];
-    //   stories = stories.filter(item => item.id !== action.payload)
-    //   state.stories = stories
-    // }
+    handleDeleteFollower: (state, action) => {
+      let followers = [...state.followers];
+      followers = followers.filter(item => item.id !== action.payload)
+      state.followers = followers
+    }
     // appendStory: (state, action) => {
     //   state.stories = [...state.stories, action.payload.newstory]
     // },
@@ -40,7 +40,7 @@ export const subscriptionSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const {setFollowers, appendFollowers, setFollowings, appendFollowings} = subscriptionSlice.actions
+export const {setFollowers, appendFollowers, setFollowings, appendFollowings, handleDeleteFollower} = subscriptionSlice.actions
 
 
 export const getFollowers = (username) => (dispatch) => {
@@ -54,19 +54,20 @@ export const getFollowings = (username) => (dispatch) => {
     dispatch(setFollowings({followings: res.data}))
   })
 }
-export const follow = (id) => async (dispatch) => {
+export const follow = (id, currentUser) => async (dispatch) => {
   try {
     axios.post(`${END_POINT}/api/${id}/follow`).then(res => {
-      dispatch(appendFollowers({newsubscription: res.data}))
+      dispatch(appendFollowers({newsubscription: {id: currentUser}}))
     })
   } catch (error) {
     console.log(error);
     alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")
   }
 }
-export const unfollow = (id) => async (dispatch) => {
+export const unfollow = (id, currentUser) => async (dispatch) => {
   try {
-    axios.post(`${END_POINT}/api/${id}/unfollow`)
+    axios.delete(`${END_POINT}/api/${id}/unfollow`)
+    dispatch(handleDeleteFollower(currentUser));
   } catch (error) {
     console.log(error);
     alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")

@@ -17,7 +17,7 @@ export default function MyProfile({user, handleCurrentPost, openModalCreateStory
   const isAuth = useSelector((state) => state.auth.isAuth)
   const currentUser = useSelector((state) => state.auth.currentUser)
   const [loading, setLoading] = useState(true);  // Состояние для отслеживания загрузки данных
-
+  const [isFollower, setFollower] = useState(false)
   useEffect(() => {
     if(!isAuth) router.push('/')
   }, [isAuth])
@@ -39,6 +39,13 @@ export default function MyProfile({user, handleCurrentPost, openModalCreateStory
     return setLoading(true)
   }, [])
 
+  useEffect(() => {
+    if(followers){
+      followers.filter(user => user.id === currentUser.id).length > 0 ? setFollower(true) : setFollower(false)
+    }
+  }, [followers])
+
+
   return(
     <div className="profile">
       {!loading && <div className="profile_inner container">
@@ -52,7 +59,8 @@ export default function MyProfile({user, handleCurrentPost, openModalCreateStory
           <div className="profile_text">
             <div className="profile_name_big flex flex-ai-c gap8">
               <h2>{user && user.full_name}</h2>
-              {currentUser.id !== user.id && <button className="button" onClick={() => dispatch(follow(user.id))}>Follow</button> }
+              {currentUser.id !== user.id && !isFollower && <button className="button" onClick={() => dispatch(follow(user.id, currentUser.id))}>Follow</button> }
+              {currentUser.id !== user.id && isFollower &&  <button className="button" onClick={() => dispatch(unfollow(user.id, currentUser.id))}>Unfollow</button> }
               {currentUser.id === user.id && <FontAwesomeIcon onClick={() => setModal(true)} className='profile_menu_icon' icon={faEllipsis} />}
             </div>
             <div className="profile_info flex gap4 mtb4">
