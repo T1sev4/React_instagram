@@ -8,8 +8,9 @@ import { useState, useEffect } from 'react';
 import { getUserPostsByUserId } from '@/app/store/slices/postSlice';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation'
+import { follow, unfollow } from '@/app/store/slices/subscriptionSlice';
 
-export default function MyProfile({user, handleCurrentPost, openModalCreateStory, openFollowers, followers, openFollowing}){
+export default function MyProfile({user, handleCurrentPost, openModalCreateStory, openFollowers, followers, followings, openFollowing}){
   const router = useRouter()
   const dispatch = useDispatch()
   const userPosts = useSelector((state) => state.post.posts)
@@ -51,13 +52,13 @@ export default function MyProfile({user, handleCurrentPost, openModalCreateStory
           <div className="profile_text">
             <div className="profile_name_big flex flex-ai-c gap8">
               <h2>{user && user.full_name}</h2>
-              {currentUser.id !== user.id && <button className="button">Follow</button> }
+              {currentUser.id !== user.id && <button className="button" onClick={() => dispatch(follow(user.id))}>Follow</button> }
               {currentUser.id === user.id && <FontAwesomeIcon onClick={() => setModal(true)} className='profile_menu_icon' icon={faEllipsis} />}
             </div>
             <div className="profile_info flex gap4 mtb4">
               <a> <span>{userPosts.length}</span> posts</a>
               <a onClick={openFollowers}> <span>{followers.length}</span> followers</a>
-              <a onClick={openFollowing}> <span>{followers.length}</span> following</a>
+              <a onClick={openFollowing}> <span>{followings.length}</span> following</a>
             </div>
             <div className="profile_name_small">
               {user && user.username}

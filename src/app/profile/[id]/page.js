@@ -9,13 +9,19 @@ import { useParams } from 'next/navigation'
 import { getPostById } from "@/app/store/slices/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "@/app/store/slices/authSlice"
+import { getFollowers, getFollowings } from "@/app/store/slices/subscriptionSlice"
+import Followers from "@/components/followers"
+
 export default function Profile() {
   const dispatch = useDispatch()
   const {id} = useParams();
   // const post = useSelector(state => state.post.post)
   const user = useSelector(state => state.auth.user)
   console.log(user)
-
+  const followers = useSelector((state) => state.subscription.followers)
+  const followings = useSelector((state) => state.subscription.followings)
+  console.log(followers)
+  console.log(followings)
 
   const [isEditModalWindow, setIsEditModalWindow] = useState(false)
   const [detailModalWindow, setDetailModalWindow] = useState(false)
@@ -26,24 +32,28 @@ export default function Profile() {
   const [isModalCreateStory, setModalCreateStory] = useState(false); // Состояние для модального окна
  
 
-  const followers = [
-    {
-      full_name: 'Tamerlan',
-      username: 'Tamik'
-    },
-    {
-      full_name: 'Tamerlan',
-      username: 'Tamik'
-    },
-    {
-      full_name: 'Tamerlan',
-      username: 'Tamik'
-    },
-  ]
+  // const followers = [
+  //   {
+  //     full_name: 'Tamerlan',
+  //     username: 'Tamik'
+  //   },
+  //   {
+  //     full_name: 'Tamerlan',
+  //     username: 'Tamik'
+  //   },
+  //   {
+  //     full_name: 'Tamerlan',
+  //     username: 'Tamik'
+  //   },
+  // ]
 
   useEffect(() => {
     dispatch(getUserById(id))
   }, [])
+  useEffect(() => {
+    user && dispatch(getFollowers(user.username))
+    user && dispatch(getFollowings(user.username))
+  }, [user])
 
   const handleCurrentPost = (post) => {
     setCurrentPost(post)
@@ -64,13 +74,13 @@ export default function Profile() {
   return (
     <main>
       <Header openModal={() => setModalOpen(true)} />
-      <MyProfile user={user} handleCurrentPost={handleCurrentPost} followers={followers} openFollowers={() => setModalFollowers(true)} openFollowing={() => setModalFollowing(true)}/>
+      <MyProfile user={user} handleCurrentPost={handleCurrentPost} followers={followers} followings={followings} openFollowers={() => setModalFollowers(true)} openFollowing={() => setModalFollowing(true)}/>
       {detailModalWindow && <DetailPostMD close={() => {setDetailModalWindow(false)}} currentPost={currentPost} openEditModalWindow={() => setIsEditModalWindow(true)} />}
       {isEditModalWindow && <EditPostModalWindow closeModal={() => setIsEditModalWindow(false)} />}
       {isModalOpen && <ModalWindow closeModal={() => setModalOpen(false)} />}
       {isModalCreateStory && <ModalWindowCreateStory closeModal={() => {setModalCreateStory(false)}} />}
       {isModalFollowers && <Followers title="Followers" followers={followers} close={() => setModalFollowers(false)} />}
-      {isModalFollowing && <Followers title="Following" followers={followers} close={() => setModalFollowing(false)} />}
+      {isModalFollowing && <Followers title="Following" followers={followings} close={() => setModalFollowing(false)} />}
     </main>
   )
 }
