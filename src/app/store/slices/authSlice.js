@@ -8,6 +8,7 @@ let initialState ={
   isAuth: false,
   currentUser: null,
   tokenExp: 0,
+  user: null
 }
 if(token){
   let decodedToken = jwt_decode(token)
@@ -55,11 +56,14 @@ export const authSlice = createSlice({
       state.tokenExp = 0
       localStorage.removeItem("token");
     },
+    setUser: (state, action) => {
+      state.user = action.payload
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { authorize, logOut  } = authSlice.actions
+export const { authorize, logOut, setUser  } = authSlice.actions
 
 
 export const signUp = (user) => (dispatch) => {
@@ -69,6 +73,11 @@ export const signUp = (user) => (dispatch) => {
 export const signIn = (user) => (dispatch) => {
   axios.post(`${END_POINT}/api/auth/signin`, user).then(res => {
     dispatch(authorize(res.data))
+  })
+}
+export const getUserById = (id) => (dispatch) => {
+  axios.get(`${END_POINT}/api/getUserInfoById/${id}`).then(res => {
+    dispatch(setUser(res.data))
   })
 }
 

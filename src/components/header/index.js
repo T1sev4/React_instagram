@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import Link from 'next/link';
-
+import { useSelector } from 'react-redux';
 export default function Header({openModal}){
-
+  const currentUser = useSelector(state => state.auth.currentUser)
   const [inputClicked, setInputClicked] = useState();
 
   return(
@@ -38,7 +38,7 @@ export default function Header({openModal}){
           <img src='/images/header/FindPeople.svg' alt='' />
           <img src='/images/header/heart.svg' alt='' />
 
-          <Link href="/profile">
+          <Link href={`/profile/${currentUser.id}`}>
             <img src='/images/posts/post2.jpg' alt='' />
           </Link>
         </div>

@@ -14,13 +14,13 @@ import { useRouter } from "next/navigation";
 import { getCommentsByPostId, createComment, deleteComment } from "@/app/store/slices/commentSlice";
 import { getPostLikes, createPostLike, deleteLike } from "@/app/store/slices/LikeSlice";
 
-export default function DetailPostMD({currentPost, openEditModalWindow}){
+export default function DetailPostMD({close, currentPost, openEditModalWindow}){
   const dispatch = useDispatch()
   const router = useRouter()
   const commentsDB = useSelector(state => state.comment.comments)
   const user = useSelector((state) => state.auth.currentUser)
   const likes = useSelector(state => state.like.likes)
-  console.log(likes)
+  
   const [loading, setLoading] = useState(true);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
@@ -79,9 +79,8 @@ export default function DetailPostMD({currentPost, openEditModalWindow}){
           <button className="modal_close_btn"><FontAwesomeIcon icon={faXmark} /></button>
         </Link>} 
       {url === 'profile' &&
-        <Link href="/profile">
-          <button className="modal_close_btn"><FontAwesomeIcon icon={faXmark} /></button>
-        </Link>} 
+          <button onClick={close} className="modal_close_btn"><FontAwesomeIcon icon={faXmark} /></button>
+        } 
       
       {!loading && <div className="detail_modal_window">
         <div className="detail_modal_left">

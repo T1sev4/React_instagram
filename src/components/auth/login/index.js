@@ -10,6 +10,7 @@ export default function UserLogin(){
   const dispatch = useDispatch()
   const router = useRouter()
   const isAuth = useSelector((state) => state.auth.isAuth)
+  const currentUser = useSelector((state) => state.auth.currentUser)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -22,7 +23,7 @@ export default function UserLogin(){
   }
 
   useEffect(() => {
-    if(isAuth) router.push('/profile')
+    if(isAuth) router.push(`/profile/${currentUser.id}`)
   }, [isAuth])
 
   return(

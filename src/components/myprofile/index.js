@@ -5,16 +5,16 @@ import MyPosts from "../myposts"
 import { useSelector , useDispatch } from 'react-redux'
 import { logOut } from '@/app/store/slices/authSlice';
 import { useState, useEffect } from 'react';
-import { getMyPosts } from '@/app/store/slices/postSlice';
+import { getUserPostsByUserId } from '@/app/store/slices/postSlice';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation'
 
-export default function MyProfile({openModalCreateStory, openFollowers, followers, openFollowing}){
+export default function MyProfile({user, handleCurrentPost, openModalCreateStory, openFollowers, followers, openFollowing}){
   const router = useRouter()
   const dispatch = useDispatch()
   const userPosts = useSelector((state) => state.post.posts)
   const isAuth = useSelector((state) => state.auth.isAuth)
-  const user = useSelector((state) => state.auth.currentUser)
+  const currentUser = useSelector((state) => state.auth.currentUser)
   const [loading, setLoading] = useState(true);  // Состояние для отслеживания загрузки данных
 
   useEffect(() => {
@@ -25,11 +25,10 @@ export default function MyProfile({openModalCreateStory, openFollowers, follower
   const [isModal, setModal] = useState(false)
 
   const didMount = () => {
-    dispatch(getMyPosts())
-  
+    user && dispatch(getUserPostsByUserId(user.id))
   }
 
-  useEffect(didMount, [])
+  useEffect(didMount, [user])
   
   useEffect(() => {
     setLoading(false);
@@ -39,26 +38,21 @@ export default function MyProfile({openModalCreateStory, openFollowers, follower
     return setLoading(true)
   }, [])
 
-  
-
-
-
-
   return(
     <div className="profile">
       {!loading && <div className="profile_inner container">
         <div className="profile_person flex flex-ai-c">
           <div className="profile_avatar">
             <img src="/images/posts/post2.jpg" alt="" />
-            <div className='addStoriesIcon' onClick={openModalCreateStory}>
+            {currentUser.id === user.id && <div className='addStoriesIcon' onClick={openModalCreateStory}>
               <FontAwesomeIcon icon={faPlus} />
-            </div>
+            </div>}
           </div>
           <div className="profile_text">
             <div className="profile_name_big flex flex-ai-c gap8">
               <h2>{user && user.full_name}</h2>
-              <button className="button">Follow</button>
-              <FontAwesomeIcon onClick={() => setModal(true)} className='profile_menu_icon' icon={faEllipsis} />
+              {currentUser.id !== user.id && <button className="button">Follow</button> }
+              {currentUser.id === user.id && <FontAwesomeIcon onClick={() => setModal(true)} className='profile_menu_icon' icon={faEllipsis} />}
             </div>
             <div className="profile_info flex gap4 mtb4">
               <a> <span>{userPosts.length}</span> posts</a>
@@ -78,7 +72,7 @@ export default function MyProfile({openModalCreateStory, openFollowers, follower
             </div>
           </div>}
         </div>
-        <MyPosts userPosts = {userPosts} />
+        <MyPosts handleCurrentPost={handleCurrentPost} userPosts={userPosts} />
       </div>}
     </div>
   )

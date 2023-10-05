@@ -6,20 +6,37 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getCommentLikes, createCommentLike, deleteLikeComment } from "@/app/store/slices/LikeSlice";
 export default function Comment({item, remove, currentPost}){
+  console.log(item)
   const dispatch = useDispatch()
   const [isModal, setModal] = useState(false);
   const user = useSelector((state) => state.auth.currentUser)
-  const likes = useSelector((state) => state.like.commentLikes)
-  const [like, setLike] = useState()
-  console.log(item)
-
+  // const likes = useSelector((state) => state.like.commentLikes)
+  const [like, setLike] = useState(false)
+  const [countLike, setCountLike] = useState()
+  
   item && useEffect(() => {
-    dispatch(getCommentLikes(item.id))
-  }, [item])
+    item.likes > 0 ? setCountLike(item.Likes) : setCountLike(0)
+  } , [item])
+  console.log(countLike)
+  // item && useEffect(() => {
+  //   dispatch(getCommentLikes(item.id))
+  // }, [item])
 
-  useEffect(() => {
-    setLike(likes.filter(obj => obj.userId === user.id))
-   }, [likes])
+  // useEffect(() => {
+  //   setLike(likes.filter(obj => obj.userId === user.id))
+  //  }, [likes])
+  const handleSaveLike = () => {
+    let numberOfLikes = [...countLike]
+    console.log(numberOfLikes)
+    let newLike = {
+      id: numberOfLikes[numberOfLikes.length - 1].id + 1,
+      commentId: item.id
+    } 
+    numberOfLikes = [...numberOfLikes, newLike]
+    setCountLike(numberOfLikes)
+    setLike(true)
+    // dispatch(createCommentLike(item.id))
+  }
 
   return(
     <div className="comment">
@@ -46,8 +63,8 @@ export default function Comment({item, remove, currentPost}){
         </div>
       </div>
       {currentPost ? <div></div> : <div className="flex flex-ai-c gap1">
-        <p className="LikesCount">{likes.length}</p>
-        {like && like.length > 0 ? <FontAwesomeIcon onClick={() => {dispatch(deleteLikeComment(like[0].id))}} className="myIcons liked" icon={faHeart}/> : <FontAwesomeIcon onClick={() => {dispatch(createCommentLike(item.id))}} className="myIcons" icon={faHeart}/>}
+        <p className="LikesCount">{item && countLike && countLike.length}</p>
+        {like ? <FontAwesomeIcon onClick={() => {dispatch(deleteLikeComment(like[0].id))}} className="myIcons liked" icon={faHeart}/> : <FontAwesomeIcon onClick={handleSaveLike} className="myIcons" icon={faHeart}/>}
 
       </div>}
     </div>

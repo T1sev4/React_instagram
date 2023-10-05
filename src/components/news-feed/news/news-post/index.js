@@ -23,14 +23,15 @@ export default function NewsPost({save, comment, onChange, post}){
     setLike(post.Likes.filter(obj => obj.userId === user.id))
   }, [post])
 
+  
 
   return(
     <div className="newsPost">
       <div className="newPost_header">
-        <div className='flex flex-ai-c gap2'>
+        <Link href={`/profile/${post.userId}`} className='flex flex-ai-c gap2'>
           <img src="/images/posts/post2.jpg" alt="" />
           <h3>{post.User.username}</h3>
-        </div>
+        </Link>
         {/* <FontAwesomeIcon icon={faEllipsis}  /> */}
       </div>
       <div className='newPost_img'>

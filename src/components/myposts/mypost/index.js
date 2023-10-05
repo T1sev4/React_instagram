@@ -1,11 +1,11 @@
 import { END_POINT } from "@/config/end-point"
 import Link from "next/link"
-export default function MyPost({post}){
+export default function MyPost({handleCurrentPost, post}){
   return(
-    <div className="post">
-      <Link href={`/profile/${post.id}`}>
-        <img src={`${END_POINT}${post.image}`} alt="" />
-      </Link>
+    <div className="post" onClick={() => handleCurrentPost(post)}>
+  
+      <img src={`${END_POINT}${post.image}`} alt="" />
+
     </div>
   )
 }
