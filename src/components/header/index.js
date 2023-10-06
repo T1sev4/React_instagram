@@ -38,9 +38,9 @@ export default function Header({openModal}){
           <img src='/images/header/FindPeople.svg' alt='' />
           <img src='/images/header/heart.svg' alt='' />
 
-          <Link href={`/profile/${currentUser.id}`}>
+        {currentUser && <Link href={`/profile/${currentUser.id}`}>
             <img src='/images/posts/post2.jpg' alt='' />
-          </Link>
+          </Link>}
         </div>
       </div>
     </header>

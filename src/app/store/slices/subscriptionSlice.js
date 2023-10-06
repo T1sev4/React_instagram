@@ -24,7 +24,7 @@ export const subscriptionSlice = createSlice({
     },
     handleDeleteFollower: (state, action) => {
       let followers = [...state.followers];
-      followers = followers.filter(item => item.id !== action.payload)
+      followers = followers.filter(item => item.followerId !== action.payload)
       state.followers = followers
     }
     // appendStory: (state, action) => {
@@ -50,14 +50,13 @@ export const getFollowers = (username) => (dispatch) => {
 }
 export const getFollowings = (username) => (dispatch) => {
   axios.get(`${END_POINT}/api/subscription/${username}/following`).then(res => {
-    console.log(res.data)
     dispatch(setFollowings({followings: res.data}))
   })
 }
-export const follow = (id, currentUser) => async (dispatch) => {
+export const follow = (user) => async (dispatch) => {
   try {
-    axios.post(`${END_POINT}/api/${id}/follow`).then(res => {
-      dispatch(appendFollowers({newsubscription: {id: currentUser}}))
+    axios.post(`${END_POINT}/api/${user.followingId}/follow`).then(res => {
+      dispatch(appendFollowers({newsubscription: user}))
     })
   } catch (error) {
     console.log(error);

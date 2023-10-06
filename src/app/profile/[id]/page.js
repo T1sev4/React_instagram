@@ -17,11 +17,8 @@ export default function Profile() {
   const {id} = useParams();
   // const post = useSelector(state => state.post.post)
   const user = useSelector(state => state.auth.user)
-  console.log(user)
   const followers = useSelector((state) => state.subscription.followers)
   const followings = useSelector((state) => state.subscription.followings)
-  console.log(followers)
-  console.log(followings)
 
   const [isEditModalWindow, setIsEditModalWindow] = useState(false)
   const [detailModalWindow, setDetailModalWindow] = useState(false)
@@ -30,7 +27,7 @@ export default function Profile() {
   const [currentPost, setCurrentPost] = useState({}) 
   const [isModalOpen, setModalOpen] = useState(false); // Состояние для модального окна
   const [isModalCreateStory, setModalCreateStory] = useState(false); // Состояние для модального окна
- 
+  const [filteredFollowers, setFilteredFollowers] = useState();
 
   // const followers = [
   //   {
@@ -71,6 +68,22 @@ export default function Profile() {
   //   setCurrentPost(post)
   // }, [post])
 
+  useEffect(() => {
+    let newFollowers = followers.map(item => ({
+      ...item,
+      isFollow: false
+    }))
+    const updatedFollowers = followers.map(follower => {
+      const following = followings.find(f => f.followingId === follower.followerId  && f.followerId === follower.followingId);
+      return {
+        ...follower,
+        isFollow: !!following // Set isFollow to true if a match is found, otherwise false
+      };
+    });
+    setFilteredFollowers(updatedFollowers)
+  }, [followers, followings])
+
+
   return (
     <main>
       <Header openModal={() => setModalOpen(true)} />
@@ -79,8 +92,8 @@ export default function Profile() {
       {isEditModalWindow && <EditPostModalWindow closeModal={() => setIsEditModalWindow(false)} />}
       {isModalOpen && <ModalWindow closeModal={() => setModalOpen(false)} />}
       {isModalCreateStory && <ModalWindowCreateStory closeModal={() => {setModalCreateStory(false)}} />}
-      {isModalFollowers && <Followers title="Followers" followers={followers} close={() => setModalFollowers(false)} />}
-      {isModalFollowing && <Followers title="Following" followers={followings} close={() => setModalFollowing(false)} />}
+      {isModalFollowers && <Followers title="Followers" followers={filteredFollowers} close={() => setModalFollowers(false)} />}
+      {isModalFollowing && <Followers title="Following" followings={followings} close={() => setModalFollowing(false)} />}
     </main>
   )
 }

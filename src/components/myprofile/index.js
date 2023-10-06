@@ -39,10 +39,14 @@ export default function MyProfile({user, handleCurrentPost, openModalCreateStory
     return setLoading(true)
   }, [])
 
+
   useEffect(() => {
-    if(followers){
-      followers.filter(user => user.id === currentUser.id).length > 0 ? setFollower(true) : setFollower(false)
+    try {
+      followers.filter(user => user.followerId === currentUser.id).length > 0 ? setFollower(true) : setFollower(false)
+    } catch (error) {
+      console.log(error)
     }
+   
   }, [followers])
 
 
@@ -52,16 +56,16 @@ export default function MyProfile({user, handleCurrentPost, openModalCreateStory
         <div className="profile_person flex flex-ai-c">
           <div className="profile_avatar">
             <img src="/images/posts/post2.jpg" alt="" />
-            {currentUser.id === user.id && <div className='addStoriesIcon' onClick={openModalCreateStory}>
+            {currentUser && currentUser.id === user.id && <div className='addStoriesIcon' onClick={openModalCreateStory}>
               <FontAwesomeIcon icon={faPlus} />
             </div>}
           </div>
           <div className="profile_text">
             <div className="profile_name_big flex flex-ai-c gap8">
               <h2>{user && user.full_name}</h2>
-              {currentUser.id !== user.id && !isFollower && <button className="button" onClick={() => dispatch(follow(user.id, currentUser.id))}>Follow</button> }
-              {currentUser.id !== user.id && isFollower &&  <button className="button" onClick={() => dispatch(unfollow(user.id, currentUser.id))}>Unfollow</button> }
-              {currentUser.id === user.id && <FontAwesomeIcon onClick={() => setModal(true)} className='profile_menu_icon' icon={faEllipsis} />}
+              {currentUser && currentUser.id !== user.id && !isFollower && <button className="button" onClick={() => dispatch(follow({ followerId: currentUser.id, followingId: user.id,}))}>Follow</button> }
+              {currentUser && currentUser.id !== user.id && isFollower &&  <button className="button" onClick={() => dispatch(unfollow(user.id, currentUser.id))}>Unfollow</button> }
+              {currentUser && currentUser.id === user.id && <FontAwesomeIcon onClick={() => setModal(true)} className='profile_menu_icon' icon={faEllipsis} />}
             </div>
             <div className="profile_info flex gap4 mtb4">
               <a> <span>{userPosts.length}</span> posts</a>
