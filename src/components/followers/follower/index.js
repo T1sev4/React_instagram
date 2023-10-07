@@ -1,9 +1,6 @@
 import { useSelector } from "react-redux"
 export default function Follower({follower, following}){
   const currentUser = useSelector(state => state.auth.currentUser)
-  console.log(currentUser)
-  console.log(follower)
-  console.log(following)
   return (
     <div className="follower">
       <div className="follower_avatar">

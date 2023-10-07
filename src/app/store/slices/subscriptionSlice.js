@@ -43,13 +43,13 @@ export const subscriptionSlice = createSlice({
 export const {setFollowers, appendFollowers, setFollowings, appendFollowings, handleDeleteFollower} = subscriptionSlice.actions
 
 
-export const getFollowers = (username) => (dispatch) => {
-  axios.get(`${END_POINT}/api/subscription/${username}/followers`).then(res => {
+export const getFollowers = (id) => (dispatch) => {
+  axios.get(`${END_POINT}/api/subscription/${id}/followers`).then(res => {
     dispatch(setFollowers({followers: res.data}))
   })
 }
-export const getFollowings = (username) => (dispatch) => {
-  axios.get(`${END_POINT}/api/subscription/${username}/following`).then(res => {
+export const getFollowings = (id) => (dispatch) => {
+  axios.get(`${END_POINT}/api/subscription/${id}/following`).then(res => {
     dispatch(setFollowings({followings: res.data}))
   })
 }

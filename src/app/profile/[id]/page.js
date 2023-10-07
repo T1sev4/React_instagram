@@ -48,8 +48,8 @@ export default function Profile() {
     dispatch(getUserById(id))
   }, [])
   useEffect(() => {
-    user && dispatch(getFollowers(user.username))
-    user && dispatch(getFollowings(user.username))
+    user && dispatch(getFollowers(user.id))
+    user && dispatch(getFollowings(user.id))
   }, [user])
 
   const handleCurrentPost = (post) => {
