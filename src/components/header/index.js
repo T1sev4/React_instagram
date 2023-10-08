@@ -1,12 +1,28 @@
 'use client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { authorize } from '@/app/store/slices/authSlice';
+import jwt_decode from "jwt-decode";
 export default function Header({openModal}){
+  const dispatch = useDispatch()
   const currentUser = useSelector(state => state.auth.currentUser)
   const [inputClicked, setInputClicked] = useState();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    if(token){
+      let decodedToken = jwt_decode(token)
+      if(decodedToken.exp * 1000 > Date.now()){
+        dispatch(authorize({token}))
+      }else{
+        localStorage.removeItem("token");
+      }
+    }
+    
+  }, [])
 
   return(
     <header className="header">

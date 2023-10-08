@@ -3,33 +3,13 @@ import axios from 'axios'
 import { END_POINT } from '@/config/end-point'
 import jwt_decode from "jwt-decode";
 
-const token = localStorage.getItem('token')
 let initialState ={
   isAuth: false,
   currentUser: null,
   tokenExp: 0,
   user: null
 }
-if(token){
-  let decodedToken = jwt_decode(token)
-  if(decodedToken.exp * 1000 > Date.now()){
-    initialState = {
-      isAuth: true,
-      currentUser: {
-        id: decodedToken.id,
-        email: decodedToken.email,
-        full_name: decodedToken.full_name,
-        username: decodedToken.username,
-        phone: decodedToken.phone
-      },
-      tokenExp: decodedToken.exp
-    }
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    // axios.defaults.headers.common['Content-Type'] = `application/json`;
-  }else{
-    localStorage.removeItem("token");
-  }
-}
+
 
 export const authSlice = createSlice({
   name: 'auth',
