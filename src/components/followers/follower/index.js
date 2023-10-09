@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux"
-import { follow, unfollow } from "@/app/store/slices/subscriptionSlice"
+import { followProfile, unfollowProfile } from "@/app/store/slices/subscriptionSlice"
 import Link from "next/link"
 export default function Follower({follower, following}){
   console.log(follower)
@@ -13,16 +13,16 @@ export default function Follower({follower, following}){
         {follower && <div className="follower_info">
           <div className="flex flex-ai-c gap1">
             <Link className="follower-link" href={`/profile/${follower.followerId}`}>{follower.Follower && follower.Follower.full_name}</Link>
-            {!follower.isFollow && <span onClick={() => dispatch(follow({ followerId: currentUser.id, followingId: follower.followerId,}))}>• follow</span>}
+            {!follower.isFollow && follower.followerId !== currentUser.id && <span onClick={() => dispatch(followProfile({ followerId: currentUser.id, followingId: follower.followerId, Following: {full_name: follower.Follower.full_name, username: follower.Follower.username } }))}>• follow</span>}
           </div>
           <p>{follower.Follower && follower.Follower.username}</p>
         </div>}
         {following && <div className="follower_info">
-          <h3>{following && following.Following.full_name}</h3>
-          <p>{following && following.Following.username}</p>
+          <Link href={`/profile/${following.followingId}`}>{following.Following && following.Following.full_name}</Link>
+          <p>{following.Following && following.Following.username}</p>
         </div>}
       </div>
-      {following && <button onClick={() => dispatch(unfollow(following.followingId, currentUser.id))}>remove</button>}
+      {following && <button onClick={() => dispatch(unfollowProfile(following.followingId, currentUser.id))}>remove</button>}
     </div>
   )
 }

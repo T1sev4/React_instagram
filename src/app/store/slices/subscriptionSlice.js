@@ -15,6 +15,7 @@ export const subscriptionSlice = createSlice({
     },
      appendFollowers: (state, action) => {
       state.followers = [...state.followers, action.payload.newsubscription]
+
     },
     setFollowings: (state, action) => {
       state.followings = action.payload.followings
@@ -28,8 +29,6 @@ export const subscriptionSlice = createSlice({
       state.followers = followers
     },
     handleDeleteFollowings: (state, action) => {
-      console.log(state.followings)
-      console.log(action.payload)
       let followings = [...state.followings];
       followings = followings.filter(item => item.followingId !== action.payload)
       state.followings = followings
@@ -70,10 +69,29 @@ export const follow = (user) => async (dispatch) => {
     alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")
   }
 }
+export const followProfile = (user) => async (dispatch) => {
+  try {
+    axios.post(`${END_POINT}/api/${user.followingId}/follow`).then(res => {
+      dispatch(appendFollowings({newsubscription: user}))
+    })
+  } catch (error) {
+    console.log(error);
+    alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")
+  }
+}
 export const unfollow = (id, currentUser) => async (dispatch) => {
   try {
     axios.delete(`${END_POINT}/api/${id}/unfollow`)
-    dispatch(handleDeleteFollowings(currentUser));
+    dispatch(handleDeleteFollower(currentUser));
+  } catch (error) {
+    console.log(error);
+    alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")
+  }
+}
+export const unfollowProfile = (id, currentUser) => async (dispatch) => {
+  try {
+    axios.delete(`${END_POINT}/api/${id}/unfollow`)
+    dispatch(handleDeleteFollowings(id));
   } catch (error) {
     console.log(error);
     alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")

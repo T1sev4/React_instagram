@@ -93,7 +93,7 @@ export default function Profile() {
       {isModalOpen && <ModalWindow closeModal={() => setModalOpen(false)} />}
       {isModalCreateStory && <ModalWindowCreateStory closeModal={() => {setModalCreateStory(false)}} />}
       {isModalFollowers && <Followers title="Followers" followers={filteredFollowers} close={() => setModalFollowers(false)} />}
-      {isModalFollowing && <Followers title="Following" followings={followings} close={() => setModalFollowing(false)} />}
+      {isModalFollowing && <Followers title="Followings" followings={followings} close={() => setModalFollowing(false)} />}
     </main>
   )
 }

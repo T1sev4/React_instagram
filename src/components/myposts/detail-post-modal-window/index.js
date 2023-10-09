@@ -33,12 +33,17 @@ export default function DetailPostMD({close, currentPost, openEditModalWindow}){
   }, [])
 
   useEffect(() => {
-    setLoading(false);
+    
   }, [commentsDB])
 
   useEffect(() => {
     setComments(commentsDB);
+    setLoading(false);
   }, [commentsDB])
+
+  useEffect(() => {
+    return setComments([])
+  }, [])
 
   useEffect(() => {
     dispatch(getCommentsByPostId(currentPost.id))
@@ -81,7 +86,6 @@ export default function DetailPostMD({close, currentPost, openEditModalWindow}){
       {url === 'profile' &&
           <button onClick={close} className="modal_close_btn"><FontAwesomeIcon icon={faXmark} /></button>
         } 
-      
       {!loading && <div className="detail_modal_window">
         <div className="detail_modal_left">
           <img src={`${END_POINT}${currentPost.image}`} alt="" />
@@ -107,7 +111,7 @@ export default function DetailPostMD({close, currentPost, openEditModalWindow}){
           </div>
           <div className="detail_modal_comments">
           {currentPost.description && <Comment currentPost={currentPost} remove={remove} />}
-          {commentsDB.map((item, index) => (<Comment item={item} remove={remove} key={index} />))}
+          {comments.map((item, index) => (<Comment item={item} remove={remove} key={index} />))}
             
           </div>
           <div className="detail_post_info flex flex-ai-c flex-jc-sb">
