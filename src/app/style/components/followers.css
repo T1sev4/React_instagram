@@ -46,11 +46,13 @@
 }
 .follower_info span{
   color: #0095f6;
+  cursor: pointer;
 }
 .follower_info p{
   color: #a8a8a8;
   font-size: 14px;
 }
+
 .follower button{
   color: #363636;
   background: none;
@@ -61,4 +63,12 @@
   font-size: 14px;
   font-weight: 600;
   text-transform: capitalize;
+}
+.follower-link:hover{
+  color: #0095f6;
+  transition: .2s;
+}
+.follower_info span:hover{
+  opacity: 0.8;
+  transition: .2s;
 }

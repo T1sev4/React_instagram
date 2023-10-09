@@ -26,6 +26,13 @@ export const subscriptionSlice = createSlice({
       let followers = [...state.followers];
       followers = followers.filter(item => item.followerId !== action.payload)
       state.followers = followers
+    },
+    handleDeleteFollowings: (state, action) => {
+      console.log(state.followings)
+      console.log(action.payload)
+      let followings = [...state.followings];
+      followings = followings.filter(item => item.followingId !== action.payload)
+      state.followings = followings
     }
     // appendStory: (state, action) => {
     //   state.stories = [...state.stories, action.payload.newstory]
@@ -40,7 +47,7 @@ export const subscriptionSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const {setFollowers, appendFollowers, setFollowings, appendFollowings, handleDeleteFollower} = subscriptionSlice.actions
+export const {setFollowers, appendFollowers, setFollowings, appendFollowings, handleDeleteFollower, handleDeleteFollowings} = subscriptionSlice.actions
 
 
 export const getFollowers = (id) => (dispatch) => {
@@ -66,7 +73,7 @@ export const follow = (user) => async (dispatch) => {
 export const unfollow = (id, currentUser) => async (dispatch) => {
   try {
     axios.delete(`${END_POINT}/api/${id}/unfollow`)
-    dispatch(handleDeleteFollower(currentUser));
+    dispatch(handleDeleteFollowings(currentUser));
   } catch (error) {
     console.log(error);
     alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")
