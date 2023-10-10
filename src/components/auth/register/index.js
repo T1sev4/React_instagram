@@ -31,7 +31,7 @@ export default function UserRegister(){
           <input onChange={(e) => setPhone(e.target.value)} value={email} className="input" placeholder="Моб. телефон или эл. адрес"/>
           <input onChange={(e) => setFull_name(e.target.value)} value={full_name} className="input" placeholder="Имя и фамилия" />
           <input onChange={(e) => setUsername(e.target.value)} value={username} className="input" placeholder="Имя пользователя" />
-          <input onChange={(e) => setPassword(e.target.value)} value={password} className="input" placeholder="Пароль" />
+          <input onChange={(e) => setPassword(e.target.value)} type="password" value={password} className="input" placeholder="Пароль" />
           <p className="register-p">Люди, которые пользуются нашим сервисом, могли загрузить вашу контактную информацию в Instagram. Подробнее</p>
           <p className="register-p">Регистрируясь, вы принимаете наши Условия, Политику конфиденциальности и Политику в отношении файлов cookie.</p>
           <Link href='/' onClick={saveUser} type="button" className="button btn_lightBlue">Регистрация</Link>

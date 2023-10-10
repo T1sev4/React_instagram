@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "@/app/store/slices/authSlice"
 import { getFollowers, getFollowings } from "@/app/store/slices/subscriptionSlice"
 import Followers from "@/components/followers"
-
+import ModalWindow from "@/components/modal-window-create-post"
 export default function Profile() {
   const dispatch = useDispatch()
   const {id} = useParams();

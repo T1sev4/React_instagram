@@ -7,13 +7,17 @@ export const subscriptionSlice = createSlice({
   initialState:{
     followers: [],
     followings: [],
-    subscription: {}
+    subscription: {},
+    suggestions: []
   },
   reducers: {
     setFollowers: (state, action) => {
       state.followers = action.payload.followers
     },
-     appendFollowers: (state, action) => {
+    setSuggestions: (state, action) => {
+      state.suggestions = action.payload.suggestions
+    },
+    appendFollowers: (state, action) => {
       state.followers = [...state.followers, action.payload.newsubscription]
 
     },
@@ -32,6 +36,11 @@ export const subscriptionSlice = createSlice({
       let followings = [...state.followings];
       followings = followings.filter(item => item.followingId !== action.payload)
       state.followings = followings
+    },
+    handleDeleteSuggestion: (state, action) => {
+      let suggestions = [...state.suggestions];
+      suggestions = suggestions.filter(item => item.followingId !== action.payload)
+      state.suggestions = suggestions
     }
     // appendStory: (state, action) => {
     //   state.stories = [...state.stories, action.payload.newstory]
@@ -46,7 +55,7 @@ export const subscriptionSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const {setFollowers, appendFollowers, setFollowings, appendFollowings, handleDeleteFollower, handleDeleteFollowings} = subscriptionSlice.actions
+export const {setFollowers, appendFollowers, setFollowings, appendFollowings, handleDeleteFollower, handleDeleteFollowings, setSuggestions, handleDeleteSuggestion} = subscriptionSlice.actions
 
 
 export const getFollowers = (id) => (dispatch) => {
@@ -59,10 +68,25 @@ export const getFollowings = (id) => (dispatch) => {
     dispatch(setFollowings({followings: res.data}))
   })
 }
+export const getSuggestions = (id) => (dispatch) => {
+  axios.get(`${END_POINT}/api/subscription/suggestions/${id}`).then(res => {
+    dispatch(setSuggestions({suggestions: res.data}))
+  })
+}
 export const follow = (user) => async (dispatch) => {
   try {
     axios.post(`${END_POINT}/api/${user.followingId}/follow`).then(res => {
       dispatch(appendFollowers({newsubscription: user}))
+    })
+  } catch (error) {
+    console.log(error);
+    alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")
+  }
+}
+export const followSuggestion = ({followingId}) => async (dispatch) => {
+  try {
+    axios.post(`${END_POINT}/api/${followingId}/follow`).then(res => {
+      dispatch(handleDeleteSuggestion(followingId))
     })
   } catch (error) {
     console.log(error);

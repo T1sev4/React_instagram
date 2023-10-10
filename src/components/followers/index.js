@@ -8,7 +8,7 @@ export default function Followers({close, followers, followings, title}){
 
   useEffect(() => {
     followers ? setSearchResults(followers) : setSearchResults(followings)
-  }, [])
+  }, [followers, followings])
 
   const handleSearch = (event) => {
     const searchText = event.target.value;

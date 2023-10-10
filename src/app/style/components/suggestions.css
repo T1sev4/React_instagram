@@ -22,4 +22,5 @@
 }
 .suggestion p{
   color: #0095f6;
+  cursor: pointer;
 }

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { authorize } from '@/app/store/slices/authSlice';
 import jwt_decode from "jwt-decode";
-export default function Header({openModal}){
+export default function Header({openModal, onChange, value }){
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.auth.currentUser)
   const [inputClicked, setInputClicked] = useState();
@@ -39,6 +39,8 @@ export default function Header({openModal}){
             onBlur={() => {
               setInputClicked(false)
             }}
+            onChange={(e) => onChange(e)}
+            value={value}
             type='text' 
             placeholder='Поиск'
             id={

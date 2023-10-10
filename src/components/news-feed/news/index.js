@@ -3,9 +3,9 @@ import NewsPost from "./news-post"
 import { useSelector, useDispatch } from "react-redux"
 import { getUsersPosts } from "@/app/store/slices/postSlice"
 import { createComment } from "@/app/store/slices/commentSlice";
-export default function News(){
+export default function News({posts}){
   const dispatch = useDispatch()
-  const posts = useSelector(state => state.post.posts)
+  // const posts = useSelector(state => state.post.posts)
   const comments = useSelector(state => state.comment.comments)
   const [loading, setLoading] = useState(true);
   

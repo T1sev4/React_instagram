@@ -38,6 +38,7 @@ export default function MyProfile({user, handleCurrentPost, openModalCreateStory
 
   useEffect(() => {
     return setLoading(true)
+    
   }, [])
 
 
