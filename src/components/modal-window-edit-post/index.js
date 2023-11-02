@@ -10,19 +10,21 @@ import { editPost } from "@/app/store/slices/postSlice"
 import { END_POINT } from "@/config/end-point"
 import { useRouter } from "next/navigation"
 
-export default function EditPostModalWindow({closeModal}){
+export default function EditPostModalWindow({closeModal, closeDetail}){
 
   const router = useRouter()
   const dispatch = useDispatch();
   const post = useSelector(state => state.post.post)
+  const currentUser = useSelector(state => state.auth.currentUser)
   console.log(post)
+  console.log(currentUser)
   useEffect(() => {
     if(post.id){
       setSelectedImage(post.image)
       setImage(post.image)
       setDescription(post.description)
     }
-  }, [])
+  }, [post])
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [image, setImage] = useState()
@@ -43,10 +45,11 @@ export default function EditPostModalWindow({closeModal}){
     formData.append('image', image);  // 'image' - это имя поля в вашем бэкенде
     formData.append('description', description);  // если у вас есть другие поля
     formData.append('id', post.id)
-    dispatch(editPost(formData, router))
+    dispatch(editPost(formData, router, currentUser.id, post, {image: selectedImage, description: description}))
     setSelectedImage(null)
     setDescription('')
     closeModal()
+    closeDetail()
   }
 
   return(

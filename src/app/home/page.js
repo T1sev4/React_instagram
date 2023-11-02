@@ -3,6 +3,7 @@ import Header from "@/components/header"
 import NewsFeed from "@/components/news-feed"
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import ProtectedRoute from "@/components/ProtectedRoute";
 export default function Home(){
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -27,10 +28,10 @@ export default function Home(){
 
 
   return(
-    <>
+    <ProtectedRoute>
       <Header value={searchTerm} onChange={handleSearch} />
       <NewsFeed posts={searchResults} />
       
-    </>
+    </ProtectedRoute>
   )
 }

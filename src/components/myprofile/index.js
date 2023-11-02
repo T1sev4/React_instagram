@@ -14,6 +14,7 @@ export default function MyProfile({user, handleCurrentPost, openModalCreateStory
   const router = useRouter()
   const dispatch = useDispatch()
   const userPosts = useSelector((state) => state.post.posts)
+  console.log(userPosts)
   const isAuth = useSelector((state) => state.auth.isAuth)
   const currentUser = useSelector((state) => state.auth.currentUser)
   const [loading, setLoading] = useState(true);  // Состояние для отслеживания загрузки данных

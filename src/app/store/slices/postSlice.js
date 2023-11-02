@@ -22,6 +22,17 @@ export const postSlice = createSlice({
     appendPost: (state, action) => {
       state.posts = [...state.posts, action.payload.newpost]
     },
+    handleEditPost: (state, action) => {
+      let arrayPosts = [...state.posts]
+      const updatedArray = arrayPosts.map(item => {
+        if (item.id === action.payload.post.id) {
+          return { ...item, ...action.payload.editPost };
+        }
+        return item;
+      });
+      state.posts = updatedArray
+      // post[0].
+    },
     handleDeletePost: (state, action) => {
       let posts = [...state.posts];
       posts = posts.filter(item => item.id !== action.payload)
@@ -31,7 +42,7 @@ export const postSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setPosts, appendPost, setPost, handleDeletePost, setUsersPosts } = postSlice.actions
+export const { setPosts, appendPost, setPost, handleEditPost, handleDeletePost, setUsersPosts } = postSlice.actions
 
 
 export const getMyPosts = () => (dispatch) => {
@@ -65,10 +76,11 @@ export const createPost = (data) => async (dispatch) => {
     alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")
   }
 }
-export const editPost = (data, router) => async (dispatch) => {
+export const editPost = (data, id, post, editPost) => async (dispatch) => {
   try {
     axios.put(`${END_POINT}/api/post/editPost`, data)
-    router.push('/profile')
+    dispatch(handleEditPost({post: post, editPost: editPost}))
+    // router.push(`/profile/${id}`)
   } catch (error) {
     console.log(error);
     alert("Что то пошло не так, сообщите о ошибке тех спецам сайта")

@@ -8,6 +8,7 @@ import { useParams } from 'next/navigation'
 import { getPostById } from "@/app/store/slices/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 import NewsFeed from "@/components/news-feed"
+import ProtectedRoute from "@/components/ProtectedRoute";
 export default function Profile() {
   const dispatch = useDispatch()
 
@@ -33,11 +34,14 @@ export default function Profile() {
   }, [post])
 
   return (
-    <main>
-      <Header openModal={() => setModalOpen(true)} />
-      <NewsFeed />
-      {currentPost && currentPost.id && <DetailPostMD currentPost={currentPost} openEditModalWindow={() => setIsEditModalWindow(true)} />}
-      {isEditModalWindow && <EditPostModalWindow closeModal={() => setIsEditModalWindow(false)} />}
-    </main>
+    <ProtectedRoute>
+      <main>
+        <Header openModal={() => setModalOpen(true)} />
+        <NewsFeed />
+        {currentPost && currentPost.id && <DetailPostMD currentPost={currentPost} openEditModalWindow={() => setIsEditModalWindow(true)} />}
+        {isEditModalWindow && <EditPostModalWindow closeModal={() => setIsEditModalWindow(false)} />}
+      </main>
+    </ProtectedRoute>
+  
   )
 }

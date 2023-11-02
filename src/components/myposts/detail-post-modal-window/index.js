@@ -15,6 +15,7 @@ import { getCommentsByPostId, createComment, deleteComment } from "@/app/store/s
 import { getPostLikes, createPostLike, deleteLike } from "@/app/store/slices/LikeSlice";
 
 export default function DetailPostMD({close, currentPost, openEditModalWindow}){
+  console.log(currentPost)
   const dispatch = useDispatch()
   const router = useRouter()
   const commentsDB = useSelector(state => state.comment.comments)
@@ -88,7 +89,9 @@ export default function DetailPostMD({close, currentPost, openEditModalWindow}){
         } 
       {!loading && <div className="detail_modal_window">
         <div className="detail_modal_left">
-          <img src={`${END_POINT}${currentPost.image}`} alt="" />
+        {currentPost && currentPost.image.slice(0, 4) === "blob" && <img src={`${currentPost.image}`} alt="post image" />}  
+        {currentPost && currentPost.image.slice(0, 4) !== "blob" &&   <img src={`${END_POINT}${currentPost.image}`} alt="post image" />}  
+        
         </div>
         <div className="detail_modal_right">
           <div className="detail_modal_header flex flex-ai-c flex-jc-sb">
@@ -100,10 +103,10 @@ export default function DetailPostMD({close, currentPost, openEditModalWindow}){
             {isModal && <div className="comment_modal_delete">
               <div className="comment_modal_delete_bg" onClick={() => {setIsModal(false)}}></div>
               <div className="comment_modal_delete_wrapper edit_post_modal">
-                <p onClick={openEditModalWindow}>Редактировать</p>
+                <p onClick={() => openEditModalWindow(currentPost.id)}>Редактировать</p>
                 <p onClick={() => {
                   dispatch(deletePost(currentPost.id))
-                  router.push('/profile')
+                  close()
                 }}>Удалить</p>
               </div>
             </div>}

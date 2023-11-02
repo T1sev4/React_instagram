@@ -12,6 +12,7 @@ import { getUserById } from "@/app/store/slices/authSlice"
 import { getFollowers, getFollowings } from "@/app/store/slices/subscriptionSlice"
 import Followers from "@/components/followers"
 import ModalWindow from "@/components/modal-window-create-post"
+import ProtectedRoute from "@/components/ProtectedRoute"
 export default function Profile() {
   const dispatch = useDispatch()
   const {id} = useParams();
@@ -47,6 +48,7 @@ export default function Profile() {
   useEffect(() => {
     dispatch(getUserById(id))
   }, [])
+
   useEffect(() => {
     user && dispatch(getFollowers(user.id))
     user && dispatch(getFollowings(user.id))
@@ -55,6 +57,10 @@ export default function Profile() {
   const handleCurrentPost = (post) => {
     setCurrentPost(post)
     setDetailModalWindow(true)
+  }
+  const handleEditPost = (id) => {
+    setIsEditModalWindow(true)
+    dispatch(getPostById(id))
   }
 
   // const didMount = () => {
@@ -85,15 +91,18 @@ export default function Profile() {
 
 
   return (
-    <main>
-      <Header openModal={() => setModalOpen(true)} />
-      <MyProfile user={user} handleCurrentPost={handleCurrentPost} followers={followers} followings={followings} openFollowers={() => setModalFollowers(true)} openFollowing={() => setModalFollowing(true)}/>
-      {detailModalWindow && <DetailPostMD close={() => {setDetailModalWindow(false)}} currentPost={currentPost} openEditModalWindow={() => setIsEditModalWindow(true)} />}
-      {isEditModalWindow && <EditPostModalWindow closeModal={() => setIsEditModalWindow(false)} />}
-      {isModalOpen && <ModalWindow closeModal={() => setModalOpen(false)} />}
-      {isModalCreateStory && <ModalWindowCreateStory closeModal={() => {setModalCreateStory(false)}} />}
-      {isModalFollowers && <Followers title="Followers" followers={filteredFollowers} close={() => setModalFollowers(false)} />}
-      {isModalFollowing && <Followers title="Followings" followings={followings} close={() => setModalFollowing(false)} />}
-    </main>
+    <ProtectedRoute>
+      <main>
+        <Header openModal={() => setModalOpen(true)} />
+        <MyProfile user={user} handleCurrentPost={handleCurrentPost} followers={followers} followings={followings} openFollowers={() => setModalFollowers(true)} openFollowing={() => setModalFollowing(true)}/>
+        {detailModalWindow && <DetailPostMD close={() => {setDetailModalWindow(false)}} currentPost={currentPost} openEditModalWindow={handleEditPost} />}
+        {isEditModalWindow && <EditPostModalWindow closeModal={() => setIsEditModalWindow(false)} closeDetail={() => setDetailModalWindow(false)} />}
+        {isModalOpen && <ModalWindow closeModal={() => setModalOpen(false)} />}
+        {isModalCreateStory && <ModalWindowCreateStory closeModal={() => {setModalCreateStory(false)}} />}
+        {isModalFollowers && <Followers title="Followers" followers={filteredFollowers} close={() => setModalFollowers(false)} />}
+        {isModalFollowing && <Followers title="Followings" followings={followings} close={() => setModalFollowing(false)} />}
+      </main>
+    </ProtectedRoute>
+ 
   )
 }
