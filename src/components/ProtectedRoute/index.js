@@ -3,7 +3,7 @@ import jwt_decode from "jwt-decode"
 import { useEffect } from "react"
 export default function ProtectedRoute({children}){
   const router = useRouter()
-  // useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem("token")
     if(token){
       let decodedToken = jwt_decode(token)
@@ -19,6 +19,6 @@ export default function ProtectedRoute({children}){
     }else{
       router.push('/')
     }
-  // }, [])
+  }, [])
    
 }

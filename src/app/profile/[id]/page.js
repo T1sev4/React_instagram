@@ -13,6 +13,7 @@ import { getFollowers, getFollowings } from "@/app/store/slices/subscriptionSlic
 import Followers from "@/components/followers"
 import ModalWindow from "@/components/modal-window-create-post"
 import ProtectedRoute from "@/components/ProtectedRoute"
+import ModalWindowCreateStory from "@/components/modal-window-create-story"
 export default function Profile() {
   const dispatch = useDispatch()
   const {id} = useParams();

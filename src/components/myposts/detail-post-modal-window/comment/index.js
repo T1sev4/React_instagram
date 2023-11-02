@@ -14,8 +14,8 @@ export default function Comment({item, remove, currentPost}){
   const [like, setLike] = useState(false)
   const [countLike, setCountLike] = useState()
   
-  item && useEffect(() => {
-    item.likes > 0 ? setCountLike(item.Likes) : setCountLike(0)
+  useEffect(() => {
+    item && item.likes > 0 ? setCountLike(item.Likes) : setCountLike(0)
   } , [item])
   console.log(countLike)
   // item && useEffect(() => {
